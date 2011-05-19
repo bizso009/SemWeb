@@ -7,9 +7,9 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class AlbumExtractor extends FileExtractor 
 {
 
-    public AlbumExtractor(Model ontology, Document xml) 
+    public AlbumExtractor(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml);
+    	super(ontology, xml, url);
     }
 
     @Override

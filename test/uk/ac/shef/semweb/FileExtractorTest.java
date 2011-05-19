@@ -28,8 +28,9 @@ public class FileExtractorTest extends TestCase {
 	   XMLExtractorImpl impl = new XMLExtractorImpl();
        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
        String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10/xml";
+       String url = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10/xml";
        Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
-       this.extractor = new UserExtractor(model,doc);
+       this.extractor = new UserExtractor(model,doc, url);
        assertNotNull(this.extractor.query("//voteEvent"));
    }
     

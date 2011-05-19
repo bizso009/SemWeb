@@ -16,11 +16,13 @@ public abstract class FileExtractor
 
     private Model ontology;
     private Document xml;
+    private String url;
     
-    public FileExtractor(Model ontology, Document xml) 
+    public FileExtractor(Model ontology, Document xml, String url) 
     {
 		this.ontology = ontology;
 		this.xml = xml;
+		this.url = url;
     }
 
     public abstract void extract();
