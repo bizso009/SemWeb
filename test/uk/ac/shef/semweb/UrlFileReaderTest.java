@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Before;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 
 public class UrlFileReaderTest extends TestCase {
 
@@ -43,8 +45,9 @@ public class UrlFileReaderTest extends TestCase {
 	assertTrue(this.urlFileReader.isXML(this.urlFileReader.openUrl(isXmlUrl)));
 	
     }
-    public void testParseRdf(){
+    public void testParseRdf() throws IllegalStateException, ClientProtocolException, IOException{
 	Model model = this.urlFileReader.parseRdf(UrlFileReader.ONTOLOGY_URL);
+	assertNotNull(model);
 	
     }
 }

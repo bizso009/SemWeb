@@ -3,6 +3,7 @@ package uk.ac.shef.semweb;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class UrlFileReader {
 
@@ -49,5 +53,21 @@ public class UrlFileReader {
      */
     public boolean isXML(HttpEntity entity) {
 	return entity.getContentType().getValue().equals(XML_TYPE);
+    }
+
+    public Model parseRdf(String ontologyUrl) throws IllegalStateException, ClientProtocolException, IOException {
+	 Model model = ModelFactory.createDefaultModel();
+	 
+	 // use the FileManager to find the input file
+	 InputStream in = openUrl(ontologyUrl).getContent();
+	if (in == null) {
+	    throw new IllegalArgumentException(
+	                                 "File: " + ontologyUrl + " not found");
+	}
+
+	// read the RDF/XML file
+	model.read(in, null);
+
+	return model;
     }
 }
