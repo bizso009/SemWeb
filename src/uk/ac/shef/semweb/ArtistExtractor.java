@@ -8,9 +8,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import sun.security.krb5.internal.Ticket;
-
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class ArtistExtractor extends FileExtractor 
 {
@@ -21,9 +22,20 @@ public class ArtistExtractor extends FileExtractor
     }
 
     @Override
-    public void extract() 
+    public void extract() throws XPathExpressionException 
     {
-    	
+    	//create resource
+        Resource res = this.ontology.createResource(getUri());
+        //add class
+        Resource clas = this.ontology.getResource("#Artist");
+        res.addProperty(RDF.type, clas);
+        
+        String artistName = getArtistName();
+        Property nameProp = this.ontology.getProperty("#hasName");
+        res.addProperty(nameProp, artistName); 
+        
+        String[] albums = getAlbums();
+        
     }
     
     public String getArtistName() throws XPathExpressionException
