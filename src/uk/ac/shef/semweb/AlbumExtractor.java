@@ -39,7 +39,7 @@ public class AlbumExtractor extends FileExtractor
             res.addProperty(genreProp, genre);            
         }
        
-        Node imageNode = query("//genre").item(0);
+        Node imageNode = query("//image").item(0);
         if (imageNode !=null){
             String image = imageNode.getTextContent();
             Property imageProp = this.ontology.getProperty("#hasImage");
