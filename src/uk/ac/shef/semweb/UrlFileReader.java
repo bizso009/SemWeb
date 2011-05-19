@@ -20,9 +20,10 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 public class UrlFileReader {
 
-	public static final String INPUT_PATH = "input/internalLinks.txt";
-	public static final String XML_TYPE = "text/xml";
-	public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
+    public static final String INPUT_PATH = "input/internalLinks.txt";
+    public static final String XML_TYPE = "text/xml";
+    public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
+    public static final String OUTPUT_MODE = "RDF/XML-ABBREV";
 
 	/**
 	 * Reads a file and returns each line as a String
@@ -33,11 +34,13 @@ public class UrlFileReader {
 		Scanner scanner = new Scanner(inputFile);
 
 		List<String> urls = new ArrayList<String>();
-		while (scanner.hasNext()) {
+		while (scanner.hasNext()) 
+		{
 			urls.add(scanner.nextLine());
 		}
 		return urls;
 	}
+
 
 	/**
 	 * Opens the url
@@ -50,6 +53,7 @@ public class UrlFileReader {
 		HttpEntity entity = response.getEntity();
 		return entity;
 	}
+
 
 	/**
 	 * Is the entity an xml file?

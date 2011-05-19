@@ -47,6 +47,7 @@ public class UrlFileReaderTest extends TestCase {
     }
     public void testParseRdf() throws IllegalStateException, ClientProtocolException, IOException{
 	Model model = this.urlFileReader.parseRdf(UrlFileReader.ONTOLOGY_URL);
+	model.write(System.out, "N-TRIPLE");
 	assertNotNull(model);
 	
     }
