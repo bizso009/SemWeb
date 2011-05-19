@@ -18,7 +18,7 @@ public class UrlFileReader {
 
     public static final String INPUT_PATH = "input/internalLinks.txt";
     public static final String XML_TYPE = "text/xml";
-
+    public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
     /**
      * Reads a file and returns each line as a String
      */

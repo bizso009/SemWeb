@@ -43,4 +43,8 @@ public class UrlFileReaderTest extends TestCase {
 	assertTrue(this.urlFileReader.isXML(this.urlFileReader.openUrl(isXmlUrl)));
 	
     }
+    public void testParseRdf(){
+	Model model = this.urlFileReader.parseRdf(UrlFileReader.ONTOLOGY_URL);
+	
+    }
 }
