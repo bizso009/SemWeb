@@ -7,9 +7,9 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class GigExtractor extends FileExtractor 
 {
 
-    public GigExtractor(Model ontology, Document xml) 
+    public GigExtractor(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml);
+    	super(ontology, xml, url);
     }
 
     @Override

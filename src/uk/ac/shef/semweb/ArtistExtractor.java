@@ -6,16 +6,16 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 public class ArtistExtractor extends FileExtractor 
 {
-
-    public ArtistExtractor(Model ontology, Document xml) 
+	
+    public ArtistExtractor(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml);
+    	super(ontology, xml, url);
     }
 
     @Override
     public void extract() 
     {
-    	// TODO Auto-generated method stub	
+    	
     }
 
 }

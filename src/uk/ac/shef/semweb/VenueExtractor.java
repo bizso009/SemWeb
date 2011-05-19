@@ -7,9 +7,9 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class VenueExtractor extends FileExtractor 
 {
 
-    public VenueExtractor(Model ontology, Document xml) 
+    public VenueExtractor(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml);
+    	super(ontology, xml, url);
     }
 
     @Override
