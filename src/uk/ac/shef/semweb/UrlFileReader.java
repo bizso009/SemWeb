@@ -18,25 +18,28 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-public class UrlFileReader {
+public class UrlFileReader  implements XMLExtractor{
 
     public static final String INPUT_PATH = "input/internalLinks.txt";
     public static final String XML_TYPE = "text/xml";
     public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
     public static final String OUTPUT_MODE = "RDF/XML-ABBREV";
-    /**
-     * Reads a file and returns each line as a String
-     */
-    public List<String> readFile(String inputPath) throws FileNotFoundException {
-	File inputFile = new File(inputPath);
-	Scanner scanner = new Scanner(inputFile);
 
-	List<String> urls = new ArrayList<String>();
-	while (scanner.hasNext()) {
-	    urls.add(scanner.nextLine());
+	/**
+	 * Reads a file and returns each line as a String
+	 */
+	public List<String> readFile(String inputPath) throws FileNotFoundException 
+	{
+		File inputFile = new File(inputPath);
+		Scanner scanner = new Scanner(inputFile);
+
+		List<String> urls = new ArrayList<String>();
+		while (scanner.hasNext()) 
+		{
+			urls.add(scanner.nextLine());
+		}
+		return urls;
 	}
-	return urls;
-    }
 
 
 	/**
@@ -74,5 +77,19 @@ public class UrlFileReader {
 		model.read(in, null);
 
 		return model;
+	}
+
+
+	@Override
+	public String getRdfTriples(String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void saveAllTriples(String URLListFileName, String OutputFileName) {
+		// TODO Auto-generated method stub
+		
 	}
 }
