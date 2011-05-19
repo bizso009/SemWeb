@@ -39,7 +39,7 @@ public abstract class FileExtractor
         this.url = url;
     }
 
-    public abstract void extract();
+    public abstract void extract() throws XPathExpressionException;
 
     public String getUri(){
         return this.url.substring(0,this.url.lastIndexOf("/xml"));
