@@ -116,21 +116,24 @@ public class XMLExtractorImpl implements XMLExtractor
     {
 		// TODO Auto-generated method stub
     }
+    
     /*
-    public Set<Resource> getClassResources(Model model) {
-	ResIterator it = model.listResourcesWithProperty(RDF.type);
-	return it.toSet();
-
+    public Set<Resource> getClassResources(Model model) 
+    {
+		ResIterator it = model.listResourcesWithProperty(RDF.type);
+		return it.toSet();
     }
 
-    public boolean matchClassWithUrl(Resource res, String url) {
-	return url.toLowerCase().contains(res.getProperty(RDFS.label).getString().toLowerCase());
+    public boolean matchClassWithUrl(Resource res, String url) 
+    {
+		return url.toLowerCase().contains(res.getProperty(RDFS.label).getString().toLowerCase());
     }
 
-    public Set<Resource> getPropertiesByClass( Resource res) {
-	Model model = res.getModel();
-	ResIterator it = model.listResourcesWithProperty(RDFS.domain, res);
-	return it.toSet();
+    public Set<Resource> getPropertiesByClass( Resource res) 
+    {
+		Model model = res.getModel();
+		ResIterator it = model.listResourcesWithProperty(RDFS.domain, res);
+		return it.toSet();
     }
     */
     
