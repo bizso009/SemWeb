@@ -24,6 +24,7 @@ public abstract class FileExtractor
 		this.xml = xml;
 		this.url = url;
     }
+    
 
     public abstract void extract();
   
@@ -33,8 +34,8 @@ public abstract class FileExtractor
 	    XPath xpath = factory.newXPath();
 	    XPathExpression expr = xpath.compile(xPath);
 
-	    Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
-	    NodeList nodes = (NodeList) result;
-	    return nodes;
+	Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
+	NodeList nodes = (NodeList) result;
+	return nodes;
     }
 }
