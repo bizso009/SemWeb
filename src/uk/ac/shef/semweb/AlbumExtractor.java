@@ -46,9 +46,9 @@ public class AlbumExtractor extends FileExtractor
             res.addProperty(imageProp, image);            
         }
         
-        NodeList nodeList = query("//track");
-        for (int i=0; i<nodeList.getLength(); i++){
-            Node trackNode =  nodeList.item(i);
+        NodeList trackNodeList = query("//track");
+        for (int i=0; i<trackNodeList.getLength(); i++){
+            Node trackNode =  trackNodeList.item(i);
             if (trackNode != null){
                 String track = trackNode.getTextContent();
                 Property trackProp = this.ontology.getProperty("#hasTrack");
