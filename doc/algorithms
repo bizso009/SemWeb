@@ -1,8 +1,9 @@
 --------------
 PARSE XMLS
 --------------
-Get all xml files
-Foreach xml file
+Get all files
+Foreach file
+  if xml
   parse xml
   get all classes from ontology
   for each class
@@ -19,8 +20,9 @@ print ontology
 --------------
 EXTRACT DBPEDIA
 --------------
-Get all xml files
-Foreach xml file
+Get all files
+Foreach file
+  if xml
   parse xml
   get all classes from ontology
   for each class

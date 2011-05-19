@@ -47,4 +47,5 @@ public class UrlFileReaderTest extends TestCase {
 	assertNotNull(model);
 	
     }
+    
 }
