@@ -4,7 +4,6 @@ public class DBPediaFileReader extends UrlFileReader implements DBpediaExtractor
 {
 	public DBPediaFileReader()
 	{
-		super();
 	}
 
 	@Override
