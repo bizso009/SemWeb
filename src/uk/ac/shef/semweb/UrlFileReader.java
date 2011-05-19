@@ -27,7 +27,8 @@ public class UrlFileReader {
 	/**
 	 * Reads a file and returns each line as a String
 	 */
-	public List<String> readFile(String inputPath) throws FileNotFoundException {
+	public List<String> readFile(String inputPath) throws FileNotFoundException 
+	{
 		File inputFile = new File(inputPath);
 		Scanner scanner = new Scanner(inputFile);
 
