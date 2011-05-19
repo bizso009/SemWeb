@@ -19,19 +19,23 @@ public class DBpediaExtractorImpl extends XMLExtractorImpl implements DBpediaExt
 
 	public void getProperty()
 	{
-		String sparqlQueryString1= "Query goes here";
-		Query query = QueryFactory.create(sparqlQueryString1);
-		QueryExecution qexec = QueryExecutionFactory.sparqlService(this.service, query);
+		String sparqlQueryString= "Query goes here";
 		try
 		{
-			System.out.println(this.service + " is UP");
-			ResultSet results = qexec.execSelect();
-			ResultSetFormatter.out(System.out, results, query);
+			runQuery(sparqlQueryString);
 		}catch(QueryExceptionHTTP e)
 		{
 			System.out.println(this.service + " is DOWN");
-		}finally{
-			qexec.close();
 		}
+	}
+	
+	public ResultSet runQuery(String queryString) throws QueryExceptionHTTP
+	{
+		Query query = QueryFactory.create(queryString);
+		QueryExecution qexec = QueryExecutionFactory.sparqlService(this.service, query);
+		ResultSet results = qexec.execSelect();
+		ResultSetFormatter.out(System.out, results, query);
+		qexec.close();
+		return results;		
 	}
 }
