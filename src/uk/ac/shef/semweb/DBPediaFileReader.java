@@ -1,6 +1,6 @@
 package uk.ac.shef.semweb;
 
-public class DBPediaFileReader extends UrlFileReader implements DBpediaExtractor
+public class DBPediaFileReader extends XMLExtractorImpl implements DBpediaExtractor
 {
 	public DBPediaFileReader()
 	{
@@ -10,8 +10,5 @@ public class DBPediaFileReader extends UrlFileReader implements DBpediaExtractor
 	public void getDBpediaInfo(String URL) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	
-	
+	}	
 }

@@ -18,7 +18,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-public class UrlFileReader  implements XMLExtractor{
+public class UrlFileReader  {
 
     public static final String INPUT_PATH = "input/internalLinks.txt";
     public static final String XML_TYPE = "text/xml";
@@ -80,16 +80,4 @@ public class UrlFileReader  implements XMLExtractor{
 	}
 
 
-	@Override
-	public String getRdfTriples(String url) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void saveAllTriples(String URLListFileName, String OutputFileName) {
-		// TODO Auto-generated method stub
-		
-	}
 }
