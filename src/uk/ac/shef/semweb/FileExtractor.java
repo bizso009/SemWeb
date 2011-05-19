@@ -11,7 +11,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 public abstract class FileExtractor
 {
-
+    protected final String BASE = "http://poplar.dcs.shef.ac.uk";
     protected Model ontology;
     protected Document xml;
     protected String   url;

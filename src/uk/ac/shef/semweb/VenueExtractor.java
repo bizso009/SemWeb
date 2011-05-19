@@ -32,7 +32,7 @@ public class VenueExtractor extends FileExtractor
         for (int i=0; i<gigNodeList.getLength(); i++){
             Node gigNode =  gigNodeList.item(i);
             if (gigNode != null){
-                String gigUri = "http://poplar.dcs.shef.ac.uk" + gigNode.getAttributes().getNamedItem("url").getTextContent();
+                String gigUri = this.BASE + gigNode.getAttributes().getNamedItem("url").getTextContent();
                 Resource gigRes = this.ontology.createResource(gigUri);
                 Resource gigClas = this.ontology.getResource("#Gig");
                 gigRes.addProperty(RDF.type, gigClas);

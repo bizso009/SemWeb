@@ -43,16 +43,16 @@ public class UserExtractor extends FileExtractor
             if (voteEventNode != null)
             {
                 //add vote event resource
-                Resource voteEventRes = this.ontology.createResource("#VoteEvent");
+                Resource voteEventRes = this.ontology.createResource(getUri()+"#VoteEvent"+i);
                 //add class
-                Resource voteEventclas = this.ontology.getResource("#User");
+                Resource voteEventclas = this.ontology.getResource("#VoteEvent");
                 userRes.addProperty(RDF.type, voteEventclas);
                 
                 NodeList voteEventChildren = voteEventNode.getChildNodes();
                 Node gigNode = voteEventChildren.item(0);
                 if (gigNode != null)
                 {
-                    String gigUri = "http://poplar.dcs.shef.ac.uk" + gigNode.getAttributes().getNamedItem("url").getTextContent();
+                    String gigUri = this.BASE + gigNode.getAttributes().getNamedItem("url").getTextContent();
                     Resource gigRes = this.ontology.createResource(gigUri);
                     Resource gigClas = this.ontology.getResource("#Gig");
                     gigRes.addProperty(RDF.type, gigClas);
