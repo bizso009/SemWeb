@@ -14,6 +14,11 @@ Foreach file
   for each property
   map property to xml node
   get xml node value
+  if node 
+    has url attribute 
+      it's a resource
+  else
+    literal   
   add triple to ontology
 print ontology
 --------------
