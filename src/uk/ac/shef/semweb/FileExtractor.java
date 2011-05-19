@@ -38,7 +38,7 @@ public abstract class FileExtractor
         this.xml = xml;
         this.url = url;
     }
-
+//FIXME validate rdf!!!!
     public abstract void extract() throws XPathExpressionException;
 
     public String getUri(){

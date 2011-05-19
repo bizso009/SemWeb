@@ -21,31 +21,31 @@ public class AlbumExtractor extends FileExtractor
     public void extract() throws XPathExpressionException 
     {
         //create resource
-        Resource res = this.ontology.createResource(getUri());
+        Resource albumRes = this.ontology.createResource(getUri());
         //add class
-        Resource clas = this.ontology.getResource("#Album");
-        res.addProperty(RDF.type, clas);
+        Resource albumClas = this.ontology.getResource("#Album");
+        albumRes.addProperty(RDF.type, albumClas);
         
         //add title
         Node titleNode = query("//title").item(0);
         if (titleNode !=null){
             String title = titleNode.getTextContent();
             Property titleProp = this.ontology.getProperty("#hasTitle");
-            res.addProperty(titleProp, title);            
+            albumRes.addProperty(titleProp, title);            
         }
         //add genre
         Node genreNode = query("//genre").item(0);
         if (genreNode !=null){
             String genre = genreNode.getTextContent();
             Property genreProp = this.ontology.getProperty("#hasGenre");
-            res.addProperty(genreProp, genre);            
+            albumRes.addProperty(genreProp, genre);            
         }
         //add image
         Node imageNode = query("//image").item(0);
         if (imageNode !=null){
             String image = imageNode.getTextContent();
             Property imageProp = this.ontology.getProperty("#hasImage");
-            res.addProperty(imageProp, image);            
+            albumRes.addProperty(imageProp, image);            
         }
         //add tracks
         NodeList trackNodeList = query("//track");
@@ -54,7 +54,7 @@ public class AlbumExtractor extends FileExtractor
             if (trackNode != null){
                 String track = trackNode.getTextContent();
                 Property trackProp = this.ontology.getProperty("#hasTrack");
-                res.addProperty(trackProp, track);
+                albumRes.addProperty(trackProp, track);
             }
         }
         

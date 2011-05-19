@@ -13,20 +13,20 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 
-public class VenueExtractorTest extends TestCase {
+public class UserExtractorTest extends TestCase {
 
-    private VenueExtractor extractor;
+    private UserExtractor extractor;
     
    public void testExtract() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException, XPathExpressionException{
        XMLExtractorImpl impl = new XMLExtractorImpl();
        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
-       String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328/xml";
+       String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9/xml";
        Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
-       this.extractor = new VenueExtractor(model,doc,isXmlUrl);
+       this.extractor = new UserExtractor(model,doc,isXmlUrl);
        this.extractor.extract();
-       Resource res = model.getResource("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328");
+       Resource res = model.getResource("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9");
        assertNotNull(res);
-       Property p = model.getProperty("#hasGig");
+       Property p = model.getProperty("#hasVoteEvent");
        res.getProperty(p).getResource();
    }
     
