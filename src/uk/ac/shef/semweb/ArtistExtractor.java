@@ -51,6 +51,12 @@ public class ArtistExtractor extends FileExtractor
 		return getSingleItem(imageQuery);
 	}
 	
+	public String getBiography() throws XPathExpressionException
+	{
+		String biographyQuery = "//biography";
+		return getSingleItem(biographyQuery);
+	}
+	
 	public String getSingleItem(String query) throws XPathExpressionException
 	{
 		Node node = this.query(query).item(0);
