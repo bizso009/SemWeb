@@ -12,7 +12,6 @@ import com.hp.hpl.jena.rdf.model.Model;
 public abstract class FileExtractor
 {
 
-<<<<<<< HEAD
     protected Model ontology;
     protected Document xml;
     protected String   url;
@@ -39,19 +38,6 @@ public abstract class FileExtractor
         this.xml = xml;
         this.url = url;
     }
-=======
-    private Model ontology;
-    private Document xml;
-    private String url;
-    
-    public FileExtractor(Model ontology, Document xml, String url) 
-    {
-		this.ontology = ontology;
-		this.xml = xml;
-		this.url = url;
-    }
-    
->>>>>>> fe92b61c59acd8efa9d62558ba2d9d8bacf9f1c5
 
     public abstract void extract();
 
@@ -64,14 +50,9 @@ public abstract class FileExtractor
         XPath xpath = factory.newXPath();
         XPathExpression expr = xpath.compile(xPath);
 
-<<<<<<< HEAD
+
         Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
-        NodeList nodes = (NodeList)result;
+        NodeList nodes = (NodeList) result;
         return nodes;
-=======
-		Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
-		NodeList nodes = (NodeList) result;
-		return nodes;
->>>>>>> fe92b61c59acd8efa9d62558ba2d9d8bacf9f1c5
     }
 }
