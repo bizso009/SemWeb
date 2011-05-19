@@ -68,4 +68,18 @@ public class ArtistExtractorTest extends TestCase
 		
 	}
 	
+	public void testGetWebsite() throws XPathExpressionException
+	{
+		String expectedWebsite = "http://www.franzferdinand.co.uk/";
+		String website = artistExtractor.getWebsite();
+		assertEquals(expectedWebsite, website);
+	}
+	
+	public void testGetImage() throws XPathExpressionException
+	{
+		String expectedImage = "http://ext.dcs.shef.ac.uk/~u0082/intelweb2/sites/default/files/images/franz.jpg";
+		String image = artistExtractor.getImage();
+		assertEquals(expectedImage,image);
+	}
+	
 }

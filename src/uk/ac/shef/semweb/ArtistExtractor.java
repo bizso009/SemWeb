@@ -29,30 +29,52 @@ public class ArtistExtractor extends FileExtractor
     public String getArtistName() throws XPathExpressionException
     {
     	String nameQuery = "//title";
-		Node node = this.query(nameQuery).item(0);
-		String title = "";
-		if(node != null)
-		{
-			title = node.getTextContent();
-		}
-		return title;
+		return getSingleItem(nameQuery);
     }
     
 
 	public String[] getAlbums() throws XPathExpressionException
     {
     	String albumQuery = "//album";
-    	NodeList nodes = this.query(albumQuery);
-    	ArrayList<String> albumsList = new ArrayList<String>();
+    	return getListItem(albumQuery);
+    }
+	
+	public String getWebsite() throws XPathExpressionException
+	{
+		String websiteQuery = "//website";
+		return getSingleItem(websiteQuery);
+	}
+	
+	public String getImage() throws XPathExpressionException
+	{
+		String imageQuery = "//image";
+		return getSingleItem(imageQuery);
+	}
+	
+	public String getSingleItem(String query) throws XPathExpressionException
+	{
+		Node node = this.query(query).item(0);
+		String item = "";
+		if(node != null)
+		{
+			item = node.getTextContent();
+		}
+		return item;
+	}
+	
+	public String[] getListItem(String query) throws XPathExpressionException
+	{
+		NodeList nodes = this.query(query);
+    	ArrayList<String> itemList = new ArrayList<String>();
     	for(int x=0; x<nodes.getLength();x++)
     	{
     		if(nodes.item(x)!=null)
     		{
-    			albumsList.add(nodes.item(x).getTextContent());
+    			itemList.add(nodes.item(x).getTextContent());
     		}
     	}
-    	String[] albums = new String[albumsList.size()];
-    	albumsList.toArray(albums);
-		return albums;    	
-    }
+    	String[] items = new String[itemList.size()];
+    	itemList.toArray(items);
+		return items;    	
+	}
 }
