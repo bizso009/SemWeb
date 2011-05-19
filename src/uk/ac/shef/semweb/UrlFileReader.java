@@ -23,15 +23,16 @@ public class UrlFileReader {
     public static final String INPUT_PATH = "input/internalLinks.txt";
     public static final String XML_TYPE = "text/xml";
     public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
+    public static final String OUTPUT_MODE = "RDF/XML-ABBREV";
     /**
      * Reads a file and returns each line as a String
      */
     public List<String> readFile(String inputPath) throws FileNotFoundException {
 	File inputFile = new File(inputPath);
 	Scanner scanner = new Scanner(inputFile);
-	
+
 	List<String> urls = new ArrayList<String>();
-	while (scanner.hasNext()){
+	while (scanner.hasNext()) {
 	    urls.add(scanner.nextLine());
 	}
 	return urls;
@@ -40,7 +41,8 @@ public class UrlFileReader {
     /**
      * Opens the url
      */
-    public HttpEntity openUrl(String url) throws ClientProtocolException, IOException {
+    public HttpEntity openUrl(String url) throws ClientProtocolException,
+	    IOException {
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpGet httpget = new HttpGet(url);
 	HttpResponse response = httpclient.execute(httpget);
@@ -55,14 +57,15 @@ public class UrlFileReader {
 	return entity.getContentType().getValue().equals(XML_TYPE);
     }
 
-    public Model parseRdf(String ontologyUrl) throws IllegalStateException, ClientProtocolException, IOException {
-	 Model model = ModelFactory.createDefaultModel();
-	 
-	 // use the FileManager to find the input file
-	 InputStream in = openUrl(ontologyUrl).getContent();
+    public Model parseRdf(String ontologyUrl) throws IllegalStateException,
+	    ClientProtocolException, IOException {
+	Model model = ModelFactory.createDefaultModel();
+
+	// use the FileManager to find the input file
+	InputStream in = openUrl(ontologyUrl).getContent();
 	if (in == null) {
-	    throw new IllegalArgumentException(
-	                                 "File: " + ontologyUrl + " not found");
+	    throw new IllegalArgumentException("File: " + ontologyUrl
+		    + " not found");
 	}
 
 	// read the RDF/XML file
