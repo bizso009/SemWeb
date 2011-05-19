@@ -11,20 +11,23 @@ import org.w3c.dom.NodeList;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
-public abstract class FileExtractor {
+public abstract class FileExtractor 
+{
 
     private Model ontology;
     private Document xml;
     
-    public FileExtractor(Model ontology, Document xml) {
-	this.ontology = ontology;
-	this.xml = xml;
+    public FileExtractor(Model ontology, Document xml) 
+    {
+		this.ontology = ontology;
+		this.xml = xml;
     }
 
     public abstract void extract();
   
-    public NodeList query(String xPath) throws XPathExpressionException{
-	XPathFactory factory = XPathFactory.newInstance();
+    public NodeList query(String xPath) throws XPathExpressionException
+    {
+    	XPathFactory factory = XPathFactory.newInstance();
 	    XPath xpath = factory.newXPath();
 	    XPathExpression expr = xpath.compile(xPath);
 
