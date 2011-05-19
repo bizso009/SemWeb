@@ -7,9 +7,9 @@ import com.hp.hpl.jena.rdf.model.Model;
 public class UserExtractor extends FileExtractor 
 {
 
-    public UserExtractor(Model ontology, Document xml) 
+    public UserExtractor(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml);
+    	super(ontology, xml, url);
     }
 
     @Override

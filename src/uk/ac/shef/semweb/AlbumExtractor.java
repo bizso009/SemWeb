@@ -15,7 +15,7 @@ public class AlbumExtractor extends FileExtractor
     @Override
     public void extract() 
     {
-    	// TODO Auto-generated method stub	
+        this.
     }
 
 }
