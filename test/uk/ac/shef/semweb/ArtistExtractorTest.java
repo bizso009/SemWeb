@@ -52,16 +52,20 @@ public class ArtistExtractorTest extends TestCase
 		}
 	}
 	
-	public void testGetArtistName()
+	public void testGetArtistName() throws XPathExpressionException
 	{
 		String name;
-		try {
-			name = artistExtractor.getArtistName();
-			assertEquals("Franz Ferdinand", name);
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		name = artistExtractor.getArtistName();
+		assertEquals(" Franz Ferdinand", name);
+	}
+	
+	public void testGetAlbums() throws XPathExpressionException
+	{
+		String[] expectedAlbums = {"Franz Ferdinand ", "You Could Have It So Much Better"};
+		String[] albums = artistExtractor.getAlbums();
+		assertEquals(albums[0], expectedAlbums[0]);
+		assertEquals(albums[1], expectedAlbums[1]);
+		
 	}
 	
 }

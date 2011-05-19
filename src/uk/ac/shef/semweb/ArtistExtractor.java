@@ -1,8 +1,11 @@
 package uk.ac.shef.semweb;
 
+import java.util.ArrayList;
+
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import sun.security.krb5.internal.Ticket;
@@ -26,13 +29,30 @@ public class ArtistExtractor extends FileExtractor
     public String getArtistName() throws XPathExpressionException
     {
     	String nameQuery = "//title";
-		NodeList nodes = this.query(nameQuery);
+		Node node = this.query(nameQuery).item(0);
 		String title = "";
-		for(int x=0; x<nodes.getLength();x++)
+		if(node != null)
 		{
-			title = nodes.item(x).toString();
+			title = node.getTextContent();
 		}
 		return title;
     }
+    
 
+	public String[] getAlbums() throws XPathExpressionException
+    {
+    	String albumQuery = "//album";
+    	NodeList nodes = this.query(albumQuery);
+    	ArrayList<String> albumsList = new ArrayList<String>();
+    	for(int x=0; x<nodes.getLength();x++)
+    	{
+    		if(nodes.item(x)!=null)
+    		{
+    			albumsList.add(nodes.item(x).getTextContent());
+    		}
+    	}
+    	String[] albums = new String[albumsList.size()];
+    	albumsList.toArray(albums);
+		return albums;    	
+    }
 }
