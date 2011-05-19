@@ -15,21 +15,23 @@ public abstract class FileExtractor {
 
     private Model ontology;
     private Document xml;
-    
-    public FileExtractor(Model ontology, Document xml) {
+    private String url;
+
+    public FileExtractor(Model ontology, Document xml, String url) {
 	this.ontology = ontology;
 	this.xml = xml;
+	this.url = url;
     }
 
     public abstract void extract();
-  
-    public NodeList query(String xPath) throws XPathExpressionException{
-	XPathFactory factory = XPathFactory.newInstance();
-	    XPath xpath = factory.newXPath();
-	    XPathExpression expr = xpath.compile(xPath);
 
-	    Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
-	    NodeList nodes = (NodeList) result;
-	    return nodes;
+    public NodeList query(String xPath) throws XPathExpressionException {
+	XPathFactory factory = XPathFactory.newInstance();
+	XPath xpath = factory.newXPath();
+	XPathExpression expr = xpath.compile(xPath);
+
+	Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
+	NodeList nodes = (NodeList) result;
+	return nodes;
     }
 }
