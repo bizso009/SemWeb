@@ -1,14 +1,13 @@
 package uk.ac.shef.semweb;
 
 import javax.xml.xpath.XPathExpressionException;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class AlbumExtractor extends FileExtractor 
 {
@@ -23,29 +22,32 @@ public class AlbumExtractor extends FileExtractor
     {
         //create resource
         Resource res = this.ontology.createResource(getUri());
-     
-        //get title
+        //add class
+        Resource clas = this.ontology.getResource("#Album");
+        res.addProperty(RDF.type, clas);
+        
+        //add title
         Node titleNode = query("//title").item(0);
         if (titleNode !=null){
             String title = titleNode.getTextContent();
             Property titleProp = this.ontology.getProperty("#hasTitle");
             res.addProperty(titleProp, title);            
         }
-        
+        //add genre
         Node genreNode = query("//genre").item(0);
         if (genreNode !=null){
             String genre = genreNode.getTextContent();
             Property genreProp = this.ontology.getProperty("#hasGenre");
             res.addProperty(genreProp, genre);            
         }
-       
+        //add image
         Node imageNode = query("//image").item(0);
         if (imageNode !=null){
             String image = imageNode.getTextContent();
             Property imageProp = this.ontology.getProperty("#hasImage");
             res.addProperty(imageProp, image);            
         }
-        
+        //add tracks
         NodeList trackNodeList = query("//track");
         for (int i=0; i<trackNodeList.getLength(); i++){
             Node trackNode =  trackNodeList.item(i);
