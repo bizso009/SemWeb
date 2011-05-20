@@ -58,10 +58,10 @@ public class XMLExtractorImpl implements XMLExtractor
                     continue;
                 }
                 Document xml = loadXml(entity.getContent());
-                RdfBuilder extractor = getRdfBuilder(ontology, xml, url);
+                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, false);
                 extractor.extract();
                 System.out.println(" -- DONE");
-//                Thread.sleep(DELAY_MS);
+                Thread.sleep(DELAY_MS);
 
             }
             System.out.println("Writing ontology");
@@ -73,27 +73,27 @@ public class XMLExtractorImpl implements XMLExtractor
         }
     }
 
-    public RdfBuilder getRdfBuilder(Model ontology, Document xml, String url)
+    public RdfBuilder createRdfBuilder(Model ontology, Document xml, String url, boolean withWebservices)
     {
         if (url.contains("album"))
         {
-            return new AlbumBuilder(ontology, xml, url);
+            return new AlbumBuilder(ontology, xml, url, withWebservices);
         }
         if (url.contains("artist"))
         {
-            return new ArtistBuilder(ontology, xml, url);
+            return new ArtistBuilder(ontology, xml, url, withWebservices);
         }
         if (url.contains("user"))
         {
-            return new UserBuilder(ontology, xml, url);
+            return new UserBuilder(ontology, xml, url, withWebservices);
         }
         if (url.contains("gig"))
         {
-            return new GigBuilder(ontology, xml, url);
+            return new GigBuilder(ontology, xml, url, withWebservices);
         }
         if (url.contains("venue"))
         {
-            return new VenueBuilder(ontology, xml, url);
+            return new VenueBuilder(ontology, xml, url, withWebservices);
         }
         throw new IllegalArgumentException("Extractor unavaialble for " + url);
     }

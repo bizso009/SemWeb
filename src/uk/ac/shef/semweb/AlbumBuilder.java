@@ -9,9 +9,9 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class AlbumBuilder extends RdfBuilder
 {
 
-    public AlbumBuilder(Model ontology, Document xml, String url)
+    public AlbumBuilder(Model ontology, Document xml, String url, boolean withWebServices)
     {
-        super(ontology, xml, url, false);
+        super(ontology, xml, url, withWebServices);
 
     }
 
@@ -35,7 +35,7 @@ public class AlbumBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        // TODO Auto-generated method stub
+        // nothing to extract
         
     }
 }

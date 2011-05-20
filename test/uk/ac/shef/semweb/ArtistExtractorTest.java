@@ -17,8 +17,8 @@ import junit.framework.TestCase;
 
 public class ArtistExtractorTest extends TestCase
 {
-	private ArtistExtractor artistExtractor;
-	/*
+	/*private ArtistExtractor artistExtractor;
+	
 	@Override
 	@Before
 	public void setUp()

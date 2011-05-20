@@ -2,19 +2,19 @@ package uk.ac.shef.semweb;
 
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import junit.framework.TestCase;
 import org.apache.http.client.ClientProtocolException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class RdfBuilderTest extends TestCase
 {
 
-    private RdfBuilder extractor;
+    private RdfBuilder builder;
 
 
     public void testQuery() throws IllegalStateException, ClientProtocolException, SAXException, IOException,
@@ -24,11 +24,21 @@ public class RdfBuilderTest extends TestCase
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
         String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10/xml";
         Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
-        this.extractor = new UserBuilder(model, doc, isXmlUrl);
-        assertEquals("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10", this.extractor.getUri());
-        assertNotNull(this.extractor.query("//voteEvent"));
+        this.builder = new UserBuilder(model, doc, isXmlUrl,true);
+        assertEquals("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10", this.builder.getUri());
+        assertNotNull(this.builder.queryTag("//voteEvent"));
     }
+/*
+    public void testDBpedia() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException{
+        XMLExtractorImpl impl = new XMLExtractorImpl();
+        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323/xml";
+        Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
+        this.builder = new AlbumBuilder(model, doc, testUrl,true);        
+        ResultSet rs = this.builder.queryDBpedia("http://dbpedia.org/resource/Coldplay", "http://dbpedia.org/property/genre");
+        assertEquals("Alternative rock",rs.next().getLiteral("arg0").getString());
+    }*/
     public void testAlbum() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
@@ -37,17 +47,17 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new AlbumBuilder(model, doc, testUrl);
-        this.extractor.extractXml();
+        this.builder = new AlbumBuilder(model, doc, testUrl,true);
+        this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
 
-        assertEquals("Yesterdays", res.getProperty(this.extractor.titleProp).getString());
-        assertEquals("Rock", res.getProperty(this.extractor.genreProp).getString());
-        assertEquals("http://ext.dcs.shef.ac.uk/~u0082/intelweb2/sites/default/files/images/yesterdays.jpg", res.getProperty(this.extractor.imageProp)
+        assertEquals("Yesterdays", res.getProperty(this.builder.titleProp).getString());
+        assertEquals("Rock", res.getProperty(this.builder.genreProp).getString());
+        assertEquals("http://ext.dcs.shef.ac.uk/~u0082/intelweb2/sites/default/files/images/yesterdays.jpg", res.getProperty(this.builder.imageProp)
                 .getString());
-        assertTrue(res.hasProperty(this.extractor.trackProp));
+        assertTrue(res.hasProperty(this.builder.trackProp));
     }
 
     public void testUser() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException    {
@@ -57,23 +67,23 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new UserBuilder(model, doc, testUrl);
-        this.extractor.extractXml();
+        this.builder = new UserBuilder(model, doc, testUrl,true);
+        this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
 
-        assertEquals("intelliUser9", res.getProperty(this.extractor.usernameProp).getString());
-        assertTrue(res.hasProperty(this.extractor.voteEventProp));
+        assertEquals("intelliUser9", res.getProperty(this.builder.usernameProp).getString());
+        assertTrue(res.hasProperty(this.builder.voteEventProp));
 
-        Resource voteEventRes = res.getProperty(this.extractor.voteEventProp).getResource();
+        Resource voteEventRes = res.getProperty(this.builder.voteEventProp).getResource();
         assertNotNull(voteEventRes);
 
-        Resource gigRes = voteEventRes.getProperty(this.extractor.gigProp).getResource();
+        Resource gigRes = voteEventRes.getProperty(this.builder.gigProp).getResource();
         assertNotNull(gigRes);
 
-        assertTrue(voteEventRes.hasProperty(this.extractor.voteProp));
-        assertTrue(gigRes.hasProperty(this.extractor.titleProp));
+        assertTrue(voteEventRes.hasProperty(this.builder.voteProp));
+        assertTrue(gigRes.hasProperty(this.builder.titleProp));
 
     }
 
@@ -85,18 +95,18 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new VenueBuilder(model, doc, testUrl);
-        this.extractor.extractXml();
+        this.builder = new VenueBuilder(model, doc, testUrl,true);
+        this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
 
-        assertEquals("http://www.sbg.org/", res.getProperty(this.extractor.websiteProp).getString());
-        assertEquals("Botanical Gardens", res.getProperty(this.extractor.nameProp).getString());
+        assertEquals("http://www.sbg.org/", res.getProperty(this.builder.websiteProp).getString());
+        assertEquals("Botanical Gardens", res.getProperty(this.builder.nameProp).getString());
         
-        Resource gigRes = res.getProperty(this.extractor.gigProp).getResource();
+        Resource gigRes = res.getProperty(this.builder.gigProp).getResource();
         assertNotNull(gigRes);
-        assertTrue(gigRes.hasProperty(this.extractor.titleProp));
+        assertTrue(gigRes.hasProperty(this.builder.titleProp));
     }
 
     public void testGig() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException
@@ -107,17 +117,17 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new GigBuilder(model, doc, testUrl);
-        this.extractor.extractXml();
+        this.builder = new GigBuilder(model, doc, testUrl);
+        this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
 
-        assertEquals("Friday, 25 May, 2007", res.getProperty(this.extractor.dateProp).getString());
+        assertEquals("Friday, 25 May, 2007", res.getProperty(this.builder.dateProp).getString());
         
-        Resource artistRes = res.getProperty(this.extractor.artistProp).getResource();
+        Resource artistRes = res.getProperty(this.builder.artistProp).getResource();
         assertNotNull(artistRes);
-        assertTrue(artistRes.hasProperty(this.extractor.nameProp));
+        assertTrue(artistRes.hasProperty(this.builder.nameProp));
     }
 
     public void testArtist() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException
@@ -128,17 +138,19 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/384";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new ArtistBuilder(model, doc, testUrl);
-        this.extractor.extractXml();
+        this.builder = new ArtistBuilder(model, doc, testUrl, true);
+        this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
 
-        assertEquals("http://www.coldplay.com/", res.getProperty(this.extractor.websiteProp).getString());
+        assertEquals("http://www.coldplay.com/", res.getProperty(this.builder.websiteProp).getString());
         
-        Resource albumRes = res.getProperty(this.extractor.albumProp).getResource();
+        Resource albumRes = res.getProperty(this.builder.albumProp).getResource();
         assertNotNull(albumRes);
-        assertTrue(albumRes.hasProperty(this.extractor.titleProp));
+        assertTrue(albumRes.hasProperty(this.builder.titleProp));
+        
+        assertEquals("Alternative rock",res.getProperty(this.builder.genreProp).getString());
     }
 
 }

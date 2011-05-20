@@ -1,6 +1,5 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -11,9 +10,9 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class UserBuilder extends RdfBuilder
 {
 
-    public UserBuilder(Model ontology, Document xml, String url)
+    public UserBuilder(Model ontology, Document xml, String url, boolean withWebServices)
     {
-        super(ontology, xml, url, false);
+        super(ontology, xml, url, withWebServices);
     }
 
     @Override

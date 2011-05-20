@@ -1,6 +1,5 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -10,9 +9,9 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class VenueBuilder extends RdfBuilder
 {
 
-    public VenueBuilder(Model ontology, Document xml, String url)
+    public VenueBuilder(Model ontology, Document xml, String url, boolean withWebSerives)
     {
-        super(ontology, xml, url, false);
+        super(ontology, xml, url, withWebSerives);
     }
 
     @Override

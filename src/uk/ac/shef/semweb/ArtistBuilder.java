@@ -9,9 +9,9 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ArtistBuilder extends RdfBuilder 
 {
 	
-    public ArtistBuilder(Model ontology, Document xml, String url) 
+    public ArtistBuilder(Model ontology, Document xml, String url, boolean withWebServices) 
     {
-    	super(ontology, xml, url, false);
+    	super(ontology, xml, url, withWebServices);
     }
 
     @Override
