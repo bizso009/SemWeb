@@ -18,6 +18,7 @@ public class AlbumBuilder extends RdfBuilder
     @Override
     public void extractXml()
     {
+        //TODO declare resource as field
         Resource albumRes = this.ontology.createResource(getUri());
         albumRes.addProperty(RDF.type, this.albumClas);
 

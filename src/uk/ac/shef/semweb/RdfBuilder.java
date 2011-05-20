@@ -189,7 +189,7 @@ public abstract class RdfBuilder
         qexec.close();
         return results;
     }
-
+//TODO implement interfaces
     //FIXME validate rdf!!!!
     public abstract void extractXml();
 
