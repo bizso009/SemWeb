@@ -172,8 +172,8 @@ public abstract class RdfBuilder
     {
         String query = "SELECT ?"+this.dbpediaVAR+" WHERE { <" + res + "> <" + dbpediaProp + "> ?"+this.dbpediaVAR+" . }";
         return runQuery(query);
-
     }
+    
     public String dbpediaDescription(Resource res){
         ResultSet rs = queryDBpedia(res.getURI(),RDFS.label.getURI());
         if (rs.hasNext()){
@@ -181,6 +181,7 @@ public abstract class RdfBuilder
         }
         return "";
     }
+    
     protected ResultSet runQuery(String queryString) throws QueryExceptionHTTP
     {
         Query query = QueryFactory.create(queryString);

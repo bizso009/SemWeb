@@ -12,6 +12,7 @@ public class GigBuilder extends RdfBuilder
     {
     	super(ontology, xml, url, false);
     }
+    
     public GigBuilder(Model ontology, Document xml, String url, boolean withDBpedia) 
     {
         super(ontology, xml, url, withDBpedia);
