@@ -19,26 +19,27 @@ public abstract class FileExtractor
     protected Document xml;
     protected String   url;
 
-    public final Property titleProp = this.ontology.getProperty("#hasTitle");
-    public final Property genreProp = this.ontology.getProperty("#hasGenre");
-    public final Property imageProp = this.ontology.getProperty("#hasImage");
-    public final Property trackProp = this.ontology.getProperty("#hasTrack");
-    public final Property usernameProp = this.ontology.getProperty("#hasUsername");
-    public final Property gigProp = this.ontology.getProperty("#hasGig");
-    public final Property websiteProp = this.ontology.getProperty("#hasWebsite");
-    public final Property nameProp = this.ontology.getProperty("#hasName");
-    public final Property descriptionProp = this.ontology.getProperty("#hasDesription");
-    public final Property voteProp = this.ontology.getProperty("#hasVote");
-    public final Property biographyProp = this.ontology.getProperty("#hasBiography");
-    public final Property artistProp = this.ontology.getProperty("#hasArtist");
-    public final Property dateProp = this.ontology.getProperty("#hasDate");
     
-    public final Resource albumClas = this.ontology.getResource("#Album");
-    public final Resource voteEventClas = this.ontology.getResource("#VoteEvent");
-    public final Resource userClas = this.ontology.getResource("#User");
-    public final Resource artistClas = this.ontology.getResource("#Artist");
-    public final Resource gigClas = this.ontology.getResource("#Gig");
-    public final Resource venueClas = this.ontology.getResource("#Venue");
+    public final Property titleProp;
+    public final Property genreProp;
+    public final Property imageProp;
+    public final Property trackProp;
+    public final Property usernameProp;
+    public final Property gigProp;
+    public final Property websiteProp;
+    public final Property nameProp;
+    public final Property descriptionProp;
+    public final Property voteProp;
+    public final Property biographyProp;
+    public final Property artistProp;
+    public final Property dateProp;
+    
+    public final Resource albumClas;
+    public final Resource voteEventClas;
+    public final Resource userClas;
+    public final Resource artistClas;
+    public final Resource gigClas;
+    public final Resource venueClas;
     
     public final Node titleNode;
     public final Node genreNode;
@@ -62,6 +63,28 @@ public abstract class FileExtractor
         this.xml = xml;
         this.url = url;
         
+        this.titleProp = this.ontology.getProperty("#hasTitle");
+        this.genreProp = this.ontology.getProperty("#hasGenre");
+        this.imageProp = this.ontology.getProperty("#hasImage");
+        this.trackProp = this.ontology.getProperty("#hasTrack");
+        this.usernameProp = this.ontology.getProperty("#hasUsername");
+        this.gigProp = this.ontology.getProperty("#hasGig");
+        this.websiteProp = this.ontology.getProperty("#hasWebsite");
+        this.nameProp = this.ontology.getProperty("#hasName");
+        this.descriptionProp = this.ontology.getProperty("#hasDesription");
+        this.voteProp = this.ontology.getProperty("#hasVote");
+        this.biographyProp = this.ontology.getProperty("#hasBiography");
+        this.artistProp = this.ontology.getProperty("#hasArtist");
+        this.dateProp = this.ontology.getProperty("#hasDate");
+        
+        this.albumClas = this.ontology.getResource("#Album");
+        this.voteEventClas = this.ontology.getResource("#VoteEvent");
+        this.userClas = this.ontology.getResource("#User");
+        this.artistClas = this.ontology.getResource("#Artist");
+        this.gigClas = this.ontology.getResource("#Gig");
+        this.venueClas = this.ontology.getResource("#Venue");
+        
+        
         this.titleNode = query("//title").item(0);
         this.genreNode = query("//genre").item(0);
         this.imageNode = query("//image").item(0);
@@ -78,6 +101,7 @@ public abstract class FileExtractor
         this.voteEventNodes = query("//voteEvent"); 
         this.albumNodes = query("//album"); 
     }
+    
     public Model getOntology()
     {
         return this.ontology;
@@ -95,13 +119,13 @@ public abstract class FileExtractor
 
     protected String getSingleProp(Node node){
         if (node != null){
-            return node.getTextContent();
+            return node.getTextContent().trim();
         }
         return "";
     }
     protected String getUrlAttr(Node node){
         if (node != null){
-            return BASE + node.getAttributes().getNamedItem("url").getTextContent();
+            return BASE + node.getAttributes().getNamedItem("url").getTextContent().trim();
         }
         return "";
     }

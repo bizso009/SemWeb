@@ -31,18 +31,20 @@ public class FileExtractorTest extends TestCase
     public void testAlbum() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException, XPathExpressionException{
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
-        String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323/xml";
-        Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
-        this.extractor = new AlbumExtractor(model,doc,isXmlUrl);
+        String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323/xml";
+        String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323";
+        Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
+        
+        this.extractor = new AlbumExtractor(model,doc,testUrl);
         this.extractor.extract();
-        Resource res = model.getResource("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323");
+        
+        Resource res = model.getResource(testUri);
         assertNotNull(res);
        
-        Propertiy titleProp = model.getProperty("#hasTitle");
-        res.listProperties()
-        Property p = model.getProperty("#hasGenre");
-        res.lis
-        assertEquals("Rock", res.getProperty(p).getString());
+        assertEquals("Yesterdays", res.getProperty(this.extractor.titleProp).getString());
+        assertEquals("Rock", res.getProperty(this.extractor.genreProp).getString());
+        assertEquals("http://ext.dcs.shef.ac.uk/~u0082/intelweb2/sites/default/files/images/yesterdays.jpg", res.getProperty(this.extractor.imageProp).getString());
+        assertTrue(res.hasProperty(this.extractor.trackProp));
     }
     
     public void testUser() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException, XPathExpressionException{
