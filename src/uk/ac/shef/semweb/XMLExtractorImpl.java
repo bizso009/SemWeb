@@ -37,7 +37,7 @@ public class XMLExtractorImpl implements XMLExtractor {
 	public static final String OUTPUT_MODE = "RDF/XML-ABBREV";
 
 	public void extract() {
-		// TODO
+
 	}
 
 	/**

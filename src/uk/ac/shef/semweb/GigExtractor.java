@@ -1,13 +1,16 @@
 package uk.ac.shef.semweb;
 
+import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class GigExtractor extends FileExtractor 
 {
 
-    public GigExtractor(Model ontology, Document xml, String url) 
+    public GigExtractor(Model ontology, Document xml, String url) throws XPathExpressionException 
     {
     	super(ontology, xml, url);
     }
@@ -15,8 +18,17 @@ public class GigExtractor extends FileExtractor
     @Override
     public void extract() 
     {
-    	// TODO Auto-generated method stub
-	
+        Resource gigRes = this.ontology.createResource(getUri());
+        gigRes.addProperty(RDF.type, this.gigClas);
+
+        gigRes.addProperty(this.dateProp, getSingleProp(this.dateNode));
+        gigRes.addProperty(this.titleProp, getSingleProp(this.titleNode));
+        
+        Resource artistRes = this.ontology.createResource(getUrlAttr(this.artistNode));
+        artistRes.addProperty(this.nameProp, getSingleProp(this.artistNode));
+        
+        gigRes.addProperty(this.artistProp, artistRes);
+
     }
 
 }
