@@ -1,8 +1,6 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
-
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -10,7 +8,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class GigExtractor extends FileExtractor 
 {
 
-    public GigExtractor(Model ontology, Document xml, String url) throws XPathExpressionException 
+    public GigExtractor(Model ontology, Document xml, String url) 
     {
     	super(ontology, xml, url);
     }

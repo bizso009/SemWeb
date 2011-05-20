@@ -1,6 +1,5 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -10,7 +9,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class AlbumExtractor extends FileExtractor
 {
 
-    public AlbumExtractor(Model ontology, Document xml, String url) throws XPathExpressionException
+    public AlbumExtractor(Model ontology, Document xml, String url)
     {
         super(ontology, xml, url);
 

@@ -11,7 +11,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class UserExtractor extends FileExtractor
 {
 
-    public UserExtractor(Model ontology, Document xml, String url) throws XPathExpressionException
+    public UserExtractor(Model ontology, Document xml, String url)
     {
         super(ontology, xml, url);
     }

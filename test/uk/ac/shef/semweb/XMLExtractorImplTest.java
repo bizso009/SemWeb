@@ -1,5 +1,6 @@
 package uk.ac.shef.semweb;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,8 +57,12 @@ public class XMLExtractorImplTest extends TestCase {
     public void testParseRdf() throws IllegalStateException, ClientProtocolException, IOException
     {
 		Model model = this.extractor.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
-		model.write(System.out, "N-TRIPLE");
 		assertNotNull(model);	
+    }
+    
+    public void testExtract(){
+        this.extractor.extract();
+        assertTrue(new File(XMLExtractorImpl.OUTPUT_PATH).exists());
     }
     
     /*

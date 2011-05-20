@@ -10,7 +10,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class VenueExtractor extends FileExtractor
 {
 
-    public VenueExtractor(Model ontology, Document xml, String url) throws XPathExpressionException
+    public VenueExtractor(Model ontology, Document xml, String url)
     {
         super(ontology, xml, url);
     }

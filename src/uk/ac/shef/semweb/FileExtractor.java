@@ -1,6 +1,5 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -10,7 +9,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 public abstract class FileExtractor
 {
-    protected static final String BASE = "http://poplar.dcs.shef.ac.uk";
+    protected static final String URI_BASE = "http://poplar.dcs.shef.ac.uk";
+    public static final String RDF_BASE = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
     protected Model ontology;
     protected Document xml;
     protected String   url;
@@ -61,28 +61,28 @@ public abstract class FileExtractor
         this.xml = xml;
         this.url = url;
         
-        this.titleProp = this.ontology.getProperty("#hasTitle");
-        this.genreProp = this.ontology.getProperty("#hasGenre");
-        this.imageProp = this.ontology.getProperty("#hasImage");
-        this.trackProp = this.ontology.getProperty("#hasTrack");
-        this.usernameProp = this.ontology.getProperty("#hasUsername");
-        this.gigProp = this.ontology.getProperty("#hasGig");
-        this.websiteProp = this.ontology.getProperty("#hasWebsite");
-        this.nameProp = this.ontology.getProperty("#hasName");
-        this.descriptionProp = this.ontology.getProperty("#hasDesription");
-        this.voteProp = this.ontology.getProperty("#hasVote");
-        this.biographyProp = this.ontology.getProperty("#hasBiography");
-        this.artistProp = this.ontology.getProperty("#hasArtist");
-        this.dateProp = this.ontology.getProperty("#hasDate");
-        this.voteEventProp = this.ontology.getProperty("#hasVoteEvent");
-        this.albumProp = this.ontology.getProperty("#hasAlbum");
+        this.titleProp = this.ontology.getProperty(RDF_BASE + "#hasTitle");
+        this.genreProp = this.ontology.getProperty(RDF_BASE + "#hasGenre");
+        this.imageProp = this.ontology.getProperty(RDF_BASE + "#hasImage");
+        this.trackProp = this.ontology.getProperty(RDF_BASE + "#hasTrack");
+        this.usernameProp = this.ontology.getProperty(RDF_BASE + "#hasUsername");
+        this.gigProp = this.ontology.getProperty(RDF_BASE + "#hasGig");
+        this.websiteProp = this.ontology.getProperty(RDF_BASE + "#hasWebsite");
+        this.nameProp = this.ontology.getProperty(RDF_BASE + "#hasName");
+        this.descriptionProp = this.ontology.getProperty(RDF_BASE + "#hasDesription");
+        this.voteProp = this.ontology.getProperty(RDF_BASE + "#hasVote");
+        this.biographyProp = this.ontology.getProperty(RDF_BASE + "#hasBiography");
+        this.artistProp = this.ontology.getProperty(RDF_BASE + "#hasArtist");
+        this.dateProp = this.ontology.getProperty(RDF_BASE + "#hasDate");
+        this.voteEventProp = this.ontology.getProperty(RDF_BASE + "#hasVoteEvent");
+        this.albumProp = this.ontology.getProperty(RDF_BASE + "#hasAlbum");
                 
-        this.albumClas = this.ontology.getResource("#Album");
-        this.voteEventClas = this.ontology.getResource("#VoteEvent");
-        this.userClas = this.ontology.getResource("#User");
-        this.artistClas = this.ontology.getResource("#Artist");
-        this.gigClas = this.ontology.getResource("#Gig");
-        this.venueClas = this.ontology.getResource("#Venue");
+        this.albumClas = this.ontology.getResource(RDF_BASE + "#Album");
+        this.voteEventClas = this.ontology.getResource(RDF_BASE + "#VoteEvent");
+        this.userClas = this.ontology.getResource(RDF_BASE + "#User");
+        this.artistClas = this.ontology.getResource(RDF_BASE + "#Artist");
+        this.gigClas = this.ontology.getResource(RDF_BASE + "#Gig");
+        this.venueClas = this.ontology.getResource(RDF_BASE + "#Venue");
         
         
         this.titleNode = query("title").item(0);
@@ -125,7 +125,7 @@ public abstract class FileExtractor
     }
     protected String getUrlAttr(Node node){
         if (node != null){
-            return BASE + node.getAttributes().getNamedItem("url").getTextContent().trim();
+            return URI_BASE + node.getAttributes().getNamedItem("url").getTextContent().trim();
         }
         return "";
     }

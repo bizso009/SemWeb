@@ -1027,7 +1027,7 @@ http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=content/blksabbathjpg&amp;siz
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=content/rememberjpg&size=medium
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/247
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/sites/all/modules/fivestar/css/fivestar.css?E
-http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=content/black-sabbath-born-againjpg&amp;size=medium1: /~u0082/intelweb2/%3fq=users/user10
+http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=content/black-sabbath-born-againjpg&amp;size=medium
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=track/342
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=track/341
 http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=track/344

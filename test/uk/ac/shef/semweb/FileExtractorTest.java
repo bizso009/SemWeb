@@ -9,7 +9,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 public class FileExtractorTest extends TestCase
@@ -18,7 +17,7 @@ public class FileExtractorTest extends TestCase
     private FileExtractor extractor;
 
 
-    public void testQuery() throws XPathExpressionException, IllegalStateException, ClientProtocolException, SAXException, IOException,
+    public void testQuery() throws IllegalStateException, ClientProtocolException, SAXException, IOException,
             ParserConfigurationException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
@@ -30,8 +29,7 @@ public class FileExtractorTest extends TestCase
         assertNotNull(this.extractor.query("//voteEvent"));
     }
 
-    public void testAlbum() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException,
-            XPathExpressionException
+    public void testAlbum() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
@@ -52,9 +50,7 @@ public class FileExtractorTest extends TestCase
         assertTrue(res.hasProperty(this.extractor.trackProp));
     }
 
-    public void testUser() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException,
-            XPathExpressionException
-    {
+    public void testUser() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException    {
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9/xml";
@@ -81,8 +77,7 @@ public class FileExtractorTest extends TestCase
 
     }
 
-    public void testVenue() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException,
-            XPathExpressionException
+    public void testVenue() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
@@ -104,7 +99,7 @@ public class FileExtractorTest extends TestCase
         assertTrue(gigRes.hasProperty(this.extractor.titleProp));
     }
 
-    public void testGig() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException, XPathExpressionException
+    public void testGig() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
@@ -125,7 +120,7 @@ public class FileExtractorTest extends TestCase
         assertTrue(artistRes.hasProperty(this.extractor.nameProp));
     }
 
-    public void testArtist() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, XPathExpressionException
+    public void testArtist() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException
     {
         XMLExtractorImpl impl = new XMLExtractorImpl();
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
