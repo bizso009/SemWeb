@@ -5,16 +5,20 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class GigExtractor extends FileExtractor 
+public class GigBuilder extends RdfBuilder 
 {
 
-    public GigExtractor(Model ontology, Document xml, String url) 
+    public GigBuilder(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml, url);
+    	super(ontology, xml, url, false);
+    }
+    public GigBuilder(Model ontology, Document xml, String url, boolean withDBpedia) 
+    {
+        super(ontology, xml, url, withDBpedia);
     }
 
     @Override
-    public void extract() 
+    public void extractXml() 
     {
         Resource gigRes = this.ontology.createResource(getUri());
         gigRes.addProperty(RDF.type, this.gigClas);
@@ -27,6 +31,12 @@ public class GigExtractor extends FileExtractor
         
         gigRes.addProperty(this.artistProp, artistRes);
 
+    }
+    @Override
+    public void extractWebServices()
+    {
+        // TODO Auto-generated method stub
+        
     }
 
 }

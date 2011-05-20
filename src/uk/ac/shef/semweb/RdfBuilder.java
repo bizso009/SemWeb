@@ -7,13 +7,14 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public abstract class FileExtractor
+public abstract class RdfBuilder
 {
     protected static final String URI_BASE = "http://poplar.dcs.shef.ac.uk";
     public static final String RDF_BASE = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
     protected Model ontology;
     protected Document xml;
     protected String   url;
+    protected boolean withWebServices;
 
     
     public final Property titleProp;
@@ -55,11 +56,12 @@ public abstract class FileExtractor
     public final NodeList voteEventNodes;
     public final NodeList albumNodes;
     
-    public FileExtractor(Model ontology, Document xml, String url) 
+    public RdfBuilder(Model ontology, Document xml, String url, boolean withWebServices) 
     {
         this.ontology = ontology;
         this.xml = xml;
         this.url = url;
+        this.withWebServices = withWebServices;
         
         this.titleProp = this.ontology.getProperty(RDF_BASE + "#hasTitle");
         this.genreProp = this.ontology.getProperty(RDF_BASE + "#hasGenre");
@@ -133,8 +135,10 @@ public abstract class FileExtractor
    
     
 //FIXME validate rdf!!!!
-    public abstract void extract(); 
+    public abstract void extractXml(); 
 
+    public abstract void extractWebServices();
+    
     public String getUri(){
         return this.url.substring(0,this.url.lastIndexOf("/xml"));
     }
@@ -151,5 +155,14 @@ public abstract class FileExtractor
         NodeList nodes = (NodeList) result;
         return nodes;
         */
+    }
+
+    public final void extract()
+    {
+        extractXml();
+        if (this.withWebServices){
+            extractWebServices();
+        }
+        
     }
 }

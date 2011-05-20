@@ -7,16 +7,16 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class VenueExtractor extends FileExtractor
+public class VenueBuilder extends RdfBuilder
 {
 
-    public VenueExtractor(Model ontology, Document xml, String url)
+    public VenueBuilder(Model ontology, Document xml, String url)
     {
-        super(ontology, xml, url);
+        super(ontology, xml, url, false);
     }
 
     @Override
-    public void extract()
+    public void extractXml()
     {
         Resource venueRes = this.ontology.createResource(getUri());
         venueRes.addProperty(RDF.type, this.venueClas);
@@ -42,5 +42,12 @@ public class VenueExtractor extends FileExtractor
     
         //TODO get from dbpedia
         // has wikiPage, has category, has geoLon, has geoLat
+    }
+
+    @Override
+    public void extractWebServices()
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

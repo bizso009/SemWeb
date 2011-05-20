@@ -11,10 +11,10 @@ import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class FileExtractorTest extends TestCase
+public class RdfBuilderTest extends TestCase
 {
 
-    private FileExtractor extractor;
+    private RdfBuilder extractor;
 
 
     public void testQuery() throws IllegalStateException, ClientProtocolException, SAXException, IOException,
@@ -24,7 +24,7 @@ public class FileExtractorTest extends TestCase
         Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
         String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10/xml";
         Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
-        this.extractor = new UserExtractor(model, doc, isXmlUrl);
+        this.extractor = new UserBuilder(model, doc, isXmlUrl);
         assertEquals("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10", this.extractor.getUri());
         assertNotNull(this.extractor.query("//voteEvent"));
     }
@@ -37,8 +37,8 @@ public class FileExtractorTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new AlbumExtractor(model, doc, testUrl);
-        this.extractor.extract();
+        this.extractor = new AlbumBuilder(model, doc, testUrl);
+        this.extractor.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -57,8 +57,8 @@ public class FileExtractorTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new UserExtractor(model, doc, testUrl);
-        this.extractor.extract();
+        this.extractor = new UserBuilder(model, doc, testUrl);
+        this.extractor.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -85,8 +85,8 @@ public class FileExtractorTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new VenueExtractor(model, doc, testUrl);
-        this.extractor.extract();
+        this.extractor = new VenueBuilder(model, doc, testUrl);
+        this.extractor.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -107,8 +107,8 @@ public class FileExtractorTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new GigExtractor(model, doc, testUrl);
-        this.extractor.extract();
+        this.extractor = new GigBuilder(model, doc, testUrl);
+        this.extractor.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -128,8 +128,8 @@ public class FileExtractorTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/384";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
-        this.extractor = new ArtistExtractor(model, doc, testUrl);
-        this.extractor.extract();
+        this.extractor = new ArtistBuilder(model, doc, testUrl);
+        this.extractor.extractXml();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);

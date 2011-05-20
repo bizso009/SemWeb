@@ -1,10 +1,8 @@
 package uk.ac.shef.semweb;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -60,7 +58,7 @@ public class XMLExtractorImpl implements XMLExtractor
                     continue;
                 }
                 Document xml = loadXml(entity.getContent());
-                FileExtractor extractor = getFileExtractor(ontology, xml, url);
+                RdfBuilder extractor = getRdfBuilder(ontology, xml, url);
                 extractor.extract();
                 System.out.println(" -- DONE");
 //                Thread.sleep(DELAY_MS);
@@ -75,27 +73,27 @@ public class XMLExtractorImpl implements XMLExtractor
         }
     }
 
-    public FileExtractor getFileExtractor(Model ontology, Document xml, String url)
+    public RdfBuilder getRdfBuilder(Model ontology, Document xml, String url)
     {
         if (url.contains("album"))
         {
-            return new AlbumExtractor(ontology, xml, url);
+            return new AlbumBuilder(ontology, xml, url);
         }
         if (url.contains("artist"))
         {
-            return new ArtistExtractor(ontology, xml, url);
+            return new ArtistBuilder(ontology, xml, url);
         }
         if (url.contains("user"))
         {
-            return new UserExtractor(ontology, xml, url);
+            return new UserBuilder(ontology, xml, url);
         }
         if (url.contains("gig"))
         {
-            return new GigExtractor(ontology, xml, url);
+            return new GigBuilder(ontology, xml, url);
         }
         if (url.contains("venue"))
         {
-            return new VenueExtractor(ontology, xml, url);
+            return new VenueBuilder(ontology, xml, url);
         }
         throw new IllegalArgumentException("Extractor unavaialble for " + url);
     }
@@ -158,7 +156,7 @@ public class XMLExtractorImpl implements XMLExtractor
 
         // read the RDF/XML file
         model.read(in, null);
-        model.setNsPrefix("com4280", FileExtractor.RDF_BASE);
+        model.setNsPrefix("com4280", RdfBuilder.RDF_BASE);
 
         return model;
     }

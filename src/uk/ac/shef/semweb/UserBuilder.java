@@ -8,16 +8,16 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class UserExtractor extends FileExtractor
+public class UserBuilder extends RdfBuilder
 {
 
-    public UserExtractor(Model ontology, Document xml, String url)
+    public UserBuilder(Model ontology, Document xml, String url)
     {
-        super(ontology, xml, url);
+        super(ontology, xml, url, false);
     }
 
     @Override
-    public void extract()
+    public void extractXml()
     {
 
         Resource userRes = this.ontology.createResource(getUri());
@@ -51,6 +51,13 @@ public class UserExtractor extends FileExtractor
         }
         // TODO get from twitter
         //getImage 
+    }
+
+    @Override
+    public void extractWebServices()
+    {
+        // TODO Auto-generated method stub
+        
     }
 
 }

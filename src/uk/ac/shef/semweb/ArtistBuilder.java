@@ -6,16 +6,16 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class ArtistExtractor extends FileExtractor 
+public class ArtistBuilder extends RdfBuilder 
 {
 	
-    public ArtistExtractor(Model ontology, Document xml, String url) 
+    public ArtistBuilder(Model ontology, Document xml, String url) 
     {
-    	super(ontology, xml, url);
+    	super(ontology, xml, url, false);
     }
 
     @Override
-    public void extract() 
+    public void extractXml() 
     {
         Resource artistRes = this.ontology.createResource(getUri());
         artistRes.addProperty(RDF.type, this.artistClas);
@@ -36,5 +36,12 @@ public class ArtistExtractor extends FileExtractor
         
         //TODO dbpedia
         //genre, associatedband, wikipage,hometown
+    }
+
+    @Override
+    public void extractWebServices()
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

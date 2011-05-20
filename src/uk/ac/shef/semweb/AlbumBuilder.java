@@ -6,17 +6,17 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class AlbumExtractor extends FileExtractor
+public class AlbumBuilder extends RdfBuilder
 {
 
-    public AlbumExtractor(Model ontology, Document xml, String url)
+    public AlbumBuilder(Model ontology, Document xml, String url)
     {
-        super(ontology, xml, url);
+        super(ontology, xml, url, false);
 
     }
 
     @Override
-    public void extract()
+    public void extractXml()
     {
         Resource albumRes = this.ontology.createResource(getUri());
         albumRes.addProperty(RDF.type, this.albumClas);
@@ -30,5 +30,12 @@ public class AlbumExtractor extends FileExtractor
             Node trackNode = this.trackNodes.item(i);
             albumRes.addProperty(this.trackProp, getSingleProp(trackNode));
         }
+    }
+
+    @Override
+    public void extractWebServices()
+    {
+        // TODO Auto-generated method stub
+        
     }
 }
