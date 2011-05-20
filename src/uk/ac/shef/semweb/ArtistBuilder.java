@@ -52,24 +52,28 @@ public class ArtistBuilder extends RdfBuilder
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.artistRes.addProperty(this.genreProp, dbpediaDescription(res));
         }
-        
+        Extractor.delay();
+        //TODO workaround framwork bug WstxEOFException for http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/663/xml
         rs = this.queryDBpedia(dbLink, this.dbpediaAssociatedBand);
         while (rs.hasNext()){
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.artistRes.addProperty(this.associatedBandProp, dbpediaDescription(res));
         }
+        Extractor.delay();
         
         rs = this.queryDBpedia(dbLink, this.dbpediaWikiPage);
         while (rs.hasNext()){
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.artistRes.addProperty(this.wikiPageProp, res.toString());
         }
+        Extractor.delay();
         
         rs = this.queryDBpedia(dbLink, this.dbpediaHomeTown);
         while (rs.hasNext()){
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.artistRes.addProperty(this.homeTownProp, dbpediaDescription(res));
         }
+        Extractor.delay();
                 
     }
 }

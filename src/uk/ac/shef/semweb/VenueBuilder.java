@@ -56,6 +56,8 @@ public class VenueBuilder extends RdfBuilder
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.venueRes.addProperty(this.categoryProp, dbpediaDescription(res));
         }
+        Extractor.delay();
+
 
         rs = this.queryDBpedia(dbLink, this.dbpediaWikiPage);
         while (rs.hasNext())
@@ -63,6 +65,7 @@ public class VenueBuilder extends RdfBuilder
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
             this.venueRes.addProperty(this.wikiPageProp, res.toString());
         }
+        Extractor.delay();
 
         rs = this.queryDBpedia(dbLink, this.dbpediaGeoLat);
         while (rs.hasNext())
@@ -70,6 +73,7 @@ public class VenueBuilder extends RdfBuilder
             Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
             this.venueRes.addProperty(this.geoLatProp, new Float(res.getFloat()).toString());
         }
+        Extractor.delay();
         
         rs = this.queryDBpedia(dbLink, this.dbpediaGeoLon);
         while (rs.hasNext())
@@ -77,5 +81,6 @@ public class VenueBuilder extends RdfBuilder
             Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
             this.venueRes.addProperty(this.geoLonProp, new Float(res.getFloat()).toString());
         }
+        Extractor.delay();
     }
 }

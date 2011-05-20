@@ -158,6 +158,14 @@ public class RdfBuilderTest extends TestCase
         assertEquals("Alternative rock",res.getProperty(this.builder.genreProp).getString());
         assertEquals(2,res.listProperties(this.builder.wikiPageProp).toSet().size());
         assertEquals(2,res.listProperties(this.builder.homeTownProp).toSet().size());
+        
+        testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/663/xml";
+        testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/663";
+        doc = impl.loadXml(impl.openUrl(testUrl).getContent());
+
+        this.builder = new ArtistBuilder(model, doc, testUrl, true);
+        this.builder.extract();
+
     }
 
 }

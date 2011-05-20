@@ -64,6 +64,10 @@ public class ExtractorTest extends TestCase {
         this.extractor.extract(false,Extractor.XML_TRIPLES_PATH);
         assertTrue(new File(Extractor.XML_TRIPLES_PATH).exists());
     }
+    public void testDBpediaExtract(){
+        this.extractor.extract(true,Extractor.DBPEDIA_TRIPLES_PATH);
+        assertTrue(new File(Extractor.DBPEDIA_TRIPLES_PATH).exists());
+    }
     
     /*
     public void testGetClassResources() throws IllegalStateException, ClientProtocolException, IOException

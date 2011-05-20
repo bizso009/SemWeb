@@ -69,8 +69,7 @@ public class Extractor implements XMLExtractor
                 RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
                 extractor.extract();
                 System.out.println(" -- DONE");
-                Thread.sleep(DELAY_MS);
-
+                delay();
             }
             System.out.println("Writing ontology");
             ontology.write(new FileOutputStream(outputPath), OUTPUT_MODE);
@@ -79,6 +78,17 @@ public class Extractor implements XMLExtractor
         {
             e.printStackTrace();
         }
+    }
+    public static void delay(){
+        try
+        {
+            Thread.sleep(DELAY_MS);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public RdfBuilder createRdfBuilder(Model ontology, Document xml, String url, boolean withWebservices)
