@@ -1,10 +1,6 @@
 package uk.ac.shef.semweb;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -33,6 +29,8 @@ public abstract class FileExtractor
     public final Property biographyProp;
     public final Property artistProp;
     public final Property dateProp;
+    public final Property voteEventProp;
+    public final Property albumProp;
     
     public final Resource albumClas;
     public final Resource voteEventClas;
@@ -57,7 +55,7 @@ public abstract class FileExtractor
     public final NodeList voteEventNodes;
     public final NodeList albumNodes;
     
-    public FileExtractor(Model ontology, Document xml, String url) throws XPathExpressionException
+    public FileExtractor(Model ontology, Document xml, String url) 
     {
         this.ontology = ontology;
         this.xml = xml;
@@ -76,7 +74,9 @@ public abstract class FileExtractor
         this.biographyProp = this.ontology.getProperty("#hasBiography");
         this.artistProp = this.ontology.getProperty("#hasArtist");
         this.dateProp = this.ontology.getProperty("#hasDate");
-        
+        this.voteEventProp = this.ontology.getProperty("#hasVoteEvent");
+        this.albumProp = this.ontology.getProperty("#hasAlbum");
+                
         this.albumClas = this.ontology.getResource("#Album");
         this.voteEventClas = this.ontology.getResource("#VoteEvent");
         this.userClas = this.ontology.getResource("#User");
@@ -85,21 +85,21 @@ public abstract class FileExtractor
         this.venueClas = this.ontology.getResource("#Venue");
         
         
-        this.titleNode = query("//title").item(0);
-        this.genreNode = query("//genre").item(0);
-        this.imageNode = query("//image").item(0);
-        this.websiteNode = query("//website").item(0);
-        this.usernameNode = query("//twitterID").item(0);
-        this.nameNode = query("//name").item(0);
-        this.biographyNode = query("//biography").item(0);
-        this.descriptionNode = query("//description").item(0);
-        this.artistNode = query("//artist").item(0);
-        this.dateNode = query("//date").item(0);                
+        this.titleNode = query("title").item(0);
+        this.genreNode = query("genre").item(0);
+        this.imageNode = query("image").item(0);
+        this.websiteNode = query("website").item(0);
+        this.usernameNode = query("twitterID").item(0);
+        this.nameNode = query("name").item(0);
+        this.biographyNode = query("biography").item(0);
+        this.descriptionNode = query("description").item(0);
+        this.artistNode = query("artist").item(0);
+        this.dateNode = query("date").item(0);                
         
-        this.trackNodes = query("//track"); 
-        this.gigNodes = query("//gig"); 
-        this.voteEventNodes = query("//voteEvent"); 
-        this.albumNodes = query("//album"); 
+        this.trackNodes = query("track"); 
+        this.gigNodes = query("gig"); 
+        this.voteEventNodes = query("voteEvent"); 
+        this.albumNodes = query("album"); 
     }
     
     public Model getOntology()
@@ -133,13 +133,15 @@ public abstract class FileExtractor
    
     
 //FIXME validate rdf!!!!
-    public abstract void extract() throws XPathExpressionException;
+    public abstract void extract(); 
 
     public String getUri(){
         return this.url.substring(0,this.url.lastIndexOf("/xml"));
     }
-    public NodeList query(String xPath) throws XPathExpressionException
+    public NodeList query(String nodeName)
     {
+        return this.xml.getElementsByTagName(nodeName);
+     /*
         XPathFactory factory = XPathFactory.newInstance();
         XPath xpath = factory.newXPath();
         XPathExpression expr = xpath.compile(xPath);
@@ -148,5 +150,6 @@ public abstract class FileExtractor
         Object result = expr.evaluate(this.xml, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
         return nodes;
+        */
     }
 }

@@ -26,10 +26,11 @@ public class ArtistExtractor extends FileExtractor
         artistRes.addProperty(this.imageProp, getSingleProp(this.imageNode));
         artistRes.addProperty(this.websiteProp, getSingleProp(this.websiteNode));
 
-        for (int i=0; this.albumNodes.getLength()<i; i++){
+        for (int i=0; i<this.albumNodes.getLength(); i++){
             Node albumNode = this.albumNodes.item(i);
             Resource albumRes = this.ontology.createResource(getUrlAttr(albumNode));
             albumRes.addProperty(RDF.type, this.albumClas);
+            artistRes.addProperty(this.albumProp, albumRes);
             
             albumRes.addProperty(this.titleProp, getSingleProp(albumNode));
         }

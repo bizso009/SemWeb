@@ -31,18 +31,22 @@ public class UserExtractor extends FileExtractor
             Node voteEventNode = this.voteEventNodes.item(i);
 
             Resource voteEventRes = this.ontology.createResource(getUri() + "#VoteEvent" + i);
-            userRes.addProperty(RDF.type, this.voteEventClas);
+            voteEventRes.addProperty(RDF.type, this.voteEventClas);
+            userRes.addProperty(this.voteEventProp, voteEventRes);
 
             NodeList voteEventChildren = voteEventNode.getChildNodes();
 
-            Node gigNode = voteEventChildren.item(0);
+            short gigNodeIdx = 1;
+            Node gigNode = voteEventChildren.item(gigNodeIdx);
             Resource gigRes = this.ontology.createResource(getUrlAttr(gigNode));
             gigRes.addProperty(RDF.type, this.gigClas);
             gigRes.addProperty(this.titleProp, getSingleProp(gigNode));
             voteEventRes.addProperty(this.gigProp, gigRes);
 
-            Node voteNode = voteEventChildren.item(1);
+            short voteNodeIdx = 3;
+            Node voteNode = voteEventChildren.item(voteNodeIdx);
             voteEventRes.addProperty(this.voteProp, getSingleProp(voteNode));
+            
 
         }
         // TODO get from twitter
