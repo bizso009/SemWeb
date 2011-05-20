@@ -2,6 +2,8 @@ package uk.ac.shef.semweb;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -9,6 +11,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class VenueBuilder extends RdfBuilder
 {
 
+    private Resource venueRes;
     public VenueBuilder(Model ontology, Document xml, String url, boolean withWebSerives)
     {
         super(ontology, xml, url, withWebSerives);
@@ -17,7 +20,7 @@ public class VenueBuilder extends RdfBuilder
     @Override
     public void extractXml()
     {
-        Resource venueRes = this.ontology.createResource(getUri());
+        this.venueRes = this.ontology.createResource(getUri());
         venueRes.addProperty(RDF.type, this.venueClas);
 
         venueRes.addProperty(this.websiteProp, getSingleProp(this.websiteNode));
@@ -38,7 +41,6 @@ public class VenueBuilder extends RdfBuilder
 
         }
 
-    
         //TODO get from dbpedia
         // has wikiPage, has category, has geoLon, has geoLat
     }
@@ -46,7 +48,34 @@ public class VenueBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        // TODO Auto-generated method stub
+        String dbLink = getSingleProp(this.dbpediaNode);
+
+        ResultSet rs = this.queryDBpedia(dbLink, this.dbpediaCategory);
+        while (rs.hasNext())
+        {
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.venueRes.addProperty(this.categoryProp, dbpediaDescription(res));
+        }
+
+        rs = this.queryDBpedia(dbLink, this.dbpediaWikiPage);
+        while (rs.hasNext())
+        {
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.venueRes.addProperty(this.wikiPageProp, res.toString());
+        }
+
+        rs = this.queryDBpedia(dbLink, this.dbpediaGeoLat);
+        while (rs.hasNext())
+        {
+            Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
+            this.venueRes.addProperty(this.geoLatProp, new Float(res.getFloat()).toString());
+        }
         
+        rs = this.queryDBpedia(dbLink, this.dbpediaGeoLon);
+        while (rs.hasNext())
+        {
+            Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
+            this.venueRes.addProperty(this.geoLonProp, new Float(res.getFloat()).toString());
+        }
     }
 }

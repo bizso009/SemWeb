@@ -35,7 +35,7 @@ public class GigBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        // TODO Auto-generated method stub
+        // nothing to extract
         
     }
 

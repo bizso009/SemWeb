@@ -2,12 +2,16 @@ package uk.ac.shef.semweb;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class ArtistBuilder extends RdfBuilder 
 {
+	private Resource artistRes;
 	
     public ArtistBuilder(Model ontology, Document xml, String url, boolean withWebServices) 
     {
@@ -17,19 +21,19 @@ public class ArtistBuilder extends RdfBuilder
     @Override
     public void extractXml() 
     {
-        Resource artistRes = this.ontology.createResource(getUri());
-        artistRes.addProperty(RDF.type, this.artistClas);
+        this.artistRes = this.ontology.createResource(getUri());
+        this.artistRes.addProperty(RDF.type, this.artistClas);
 
-        artistRes.addProperty(this.nameProp, getSingleProp(this.titleNode));
-        artistRes.addProperty(this.biographyProp, getSingleProp(this.biographyNode));
-        artistRes.addProperty(this.imageProp, getSingleProp(this.imageNode));
-        artistRes.addProperty(this.websiteProp, getSingleProp(this.websiteNode));
+        this.artistRes.addProperty(this.nameProp, getSingleProp(this.titleNode));
+        this.artistRes.addProperty(this.biographyProp, getSingleProp(this.biographyNode));
+        this.artistRes.addProperty(this.imageProp, getSingleProp(this.imageNode));
+        this.artistRes.addProperty(this.websiteProp, getSingleProp(this.websiteNode));
 
         for (int i=0; i<this.albumNodes.getLength(); i++){
             Node albumNode = this.albumNodes.item(i);
             Resource albumRes = this.ontology.createResource(getUrlAttr(albumNode));
             albumRes.addProperty(RDF.type, this.albumClas);
-            artistRes.addProperty(this.albumProp, albumRes);
+            this.artistRes.addProperty(this.albumProp, albumRes);
             
             albumRes.addProperty(this.titleProp, getSingleProp(albumNode));
         }
@@ -41,7 +45,31 @@ public class ArtistBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        // TODO Auto-generated method stub
+        String dbLink = getSingleProp(this.dbpediaNode);
         
+        ResultSet rs = this.queryDBpedia(dbLink, this.dbpediaGenre);
+        while (rs.hasNext()){
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.artistRes.addProperty(this.genreProp, dbpediaDescription(res));
+        }
+        
+        rs = this.queryDBpedia(dbLink, this.dbpediaAssociatedBand);
+        while (rs.hasNext()){
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.artistRes.addProperty(this.associatedBandProp, dbpediaDescription(res));
+        }
+        
+        rs = this.queryDBpedia(dbLink, this.dbpediaWikiPage);
+        while (rs.hasNext()){
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.artistRes.addProperty(this.wikiPageProp, res.toString());
+        }
+        
+        rs = this.queryDBpedia(dbLink, this.dbpediaHomeTown);
+        while (rs.hasNext()){
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.artistRes.addProperty(this.homeTownProp, dbpediaDescription(res));
+        }
+                
     }
 }

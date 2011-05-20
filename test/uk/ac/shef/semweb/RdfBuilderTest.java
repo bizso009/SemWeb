@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class RdfBuilderTest extends TestCase
 {
@@ -20,29 +21,31 @@ public class RdfBuilderTest extends TestCase
     public void testQuery() throws IllegalStateException, ClientProtocolException, SAXException, IOException,
             ParserConfigurationException
     {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String isXmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10/xml";
         Document doc = impl.loadXml(impl.openUrl(isXmlUrl).getContent());
         this.builder = new UserBuilder(model, doc, isXmlUrl,true);
         assertEquals("http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user10", this.builder.getUri());
         assertNotNull(this.builder.queryTag("//voteEvent"));
     }
-/*
+
     public void testDBpedia() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException{
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323/xml";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
         this.builder = new AlbumBuilder(model, doc, testUrl,true);        
-        ResultSet rs = this.builder.queryDBpedia("http://dbpedia.org/resource/Coldplay", "http://dbpedia.org/property/genre");
-        assertEquals("Alternative rock",rs.next().getLiteral("arg0").getString());
-    }*/
+        ResultSet rs = this.builder.queryDBpedia("http://dbpedia.org/resource/Coldplay", this.builder.dbpediaGenre);
+        Resource res = rs.next().getResource(this.builder.dbpediaVAR);
+        ResultSet rs2 = this.builder.queryDBpedia(res.getURI(),RDFS.label.getURI());
+        assertEquals("Alternative rock",rs2.next().getLiteral("arg").getString());
+    }
     public void testAlbum() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException
     {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323/xml";
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/323";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
@@ -61,8 +64,8 @@ public class RdfBuilderTest extends TestCase
     }
 
     public void testUser() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException    {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9/xml";
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user9";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
@@ -89,14 +92,14 @@ public class RdfBuilderTest extends TestCase
 
     public void testVenue() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException, DOMException
     {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328/xml";
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=venue/328";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
         this.builder = new VenueBuilder(model, doc, testUrl,true);
-        this.builder.extractXml();
+        this.builder.extract();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -107,12 +110,14 @@ public class RdfBuilderTest extends TestCase
         Resource gigRes = res.getProperty(this.builder.gigProp).getResource();
         assertNotNull(gigRes);
         assertTrue(gigRes.hasProperty(this.builder.titleProp));
+        assertEquals("53.372032", res.getProperty(this.builder.geoLatProp).getString());
+
     }
 
     public void testGig() throws IllegalStateException, ClientProtocolException, IOException, SAXException, ParserConfigurationException
     {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601/xml";
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
@@ -132,14 +137,14 @@ public class RdfBuilderTest extends TestCase
 
     public void testArtist() throws IllegalStateException, ClientProtocolException, SAXException, IOException, ParserConfigurationException
     {
-        XMLExtractorImpl impl = new XMLExtractorImpl();
-        Model model = impl.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+        Extractor impl = new Extractor();
+        Model model = impl.parseRdf(Extractor.ONTOLOGY_URL);
         String testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/384/xml";
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/384";
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
         this.builder = new ArtistBuilder(model, doc, testUrl, true);
-        this.builder.extractXml();
+        this.builder.extract();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -151,6 +156,8 @@ public class RdfBuilderTest extends TestCase
         assertTrue(albumRes.hasProperty(this.builder.titleProp));
         
         assertEquals("Alternative rock",res.getProperty(this.builder.genreProp).getString());
+        assertEquals(2,res.listProperties(this.builder.wikiPageProp).toSet().size());
+        assertEquals(2,res.listProperties(this.builder.homeTownProp).toSet().size());
     }
 
 }

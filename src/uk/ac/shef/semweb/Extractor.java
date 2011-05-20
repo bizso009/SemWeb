@@ -22,17 +22,25 @@ import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-public class XMLExtractorImpl implements XMLExtractor
+public class Extractor implements XMLExtractor
 {
     // TODO redundant
     public static final String INPUT_PATH   = "input/internalLinks.txt";
-    public static final String OUTPUT_PATH  = "output/XMLFileTriples.rdf";
+    public static final String XML_TRIPLES_PATH  = "output/XMLFileTriples.rdf";
+    public static final String DBPEDIA_TRIPLES_PATH  = "output/DBPediaTriples.rdf";
     public static final String XML_TYPE     = "text/xml";
     public static final String ONTOLOGY_URL = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
     public static final String OUTPUT_MODE  = "RDF/XML-ABBREV";
     public static final long   DELAY_MS     = 200;
 
-    public void extract()
+    public static void main(String[] args)
+    {
+        Extractor extractor = new Extractor();
+        extractor.extract(false,XML_TRIPLES_PATH);
+        extractor.extract(true,DBPEDIA_TRIPLES_PATH);
+        
+    }
+    public void extract(boolean withDBPedia, String outputPath)
     {
         try
         {
@@ -58,14 +66,14 @@ public class XMLExtractorImpl implements XMLExtractor
                     continue;
                 }
                 Document xml = loadXml(entity.getContent());
-                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, false);
+                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
                 extractor.extract();
                 System.out.println(" -- DONE");
                 Thread.sleep(DELAY_MS);
 
             }
             System.out.println("Writing ontology");
-            ontology.write(new FileOutputStream(OUTPUT_PATH), OUTPUT_MODE);
+            ontology.write(new FileOutputStream(outputPath), OUTPUT_MODE);
         }
         catch (Exception e)
         {

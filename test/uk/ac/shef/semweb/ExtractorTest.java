@@ -20,19 +20,19 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 
-public class XMLExtractorImplTest extends TestCase {
+public class ExtractorTest extends TestCase {
 
-    private XMLExtractorImpl extractor;
+    private Extractor extractor;
     
     @Override
     @Before
     public void setUp(){
-    	this.extractor = new XMLExtractorImpl();
+    	this.extractor = new Extractor();
     }
     
     public void testReadFile() throws FileNotFoundException
     {
-		List<String> urls = this.extractor.readFile(XMLExtractorImpl.INPUT_PATH);
+		List<String> urls = this.extractor.readFile(Extractor.INPUT_PATH);
 		assertFalse(urls.isEmpty());
 		assertFalse(urls.get(0).isEmpty());	
     }
@@ -56,19 +56,19 @@ public class XMLExtractorImplTest extends TestCase {
     
     public void testParseRdf() throws IllegalStateException, ClientProtocolException, IOException
     {
-		Model model = this.extractor.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+		Model model = this.extractor.parseRdf(Extractor.ONTOLOGY_URL);
 		assertNotNull(model);	
     }
     
-    public void testExtract(){
-        this.extractor.extract();
-        assertTrue(new File(XMLExtractorImpl.OUTPUT_PATH).exists());
+    public void testXmlExtract(){
+        this.extractor.extract(false,Extractor.XML_TRIPLES_PATH);
+        assertTrue(new File(Extractor.XML_TRIPLES_PATH).exists());
     }
     
     /*
     public void testGetClassResources() throws IllegalStateException, ClientProtocolException, IOException
     {
-		Model model = this.extractor.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+		Model model = this.extractor.parseRdf(Extractor.ONTOLOGY_URL);
 		assertFalse(this.extractor.getClassResources(model).isEmpty());
     }
     
@@ -78,7 +78,7 @@ public class XMLExtractorImplTest extends TestCase {
 		String shouldMatch = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/415/xml";
 		String shouldNotMatch = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=album/558/xml";
 	
-		Model model = this.extractor.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+		Model model = this.extractor.parseRdf(Extractor.ONTOLOGY_URL);
 		Resource res = model.getResource(artistUri);
 		assertTrue(this.extractor.matchClassWithUrl(res,shouldMatch));
 		assertFalse(this.extractor.matchClassWithUrl(res,shouldNotMatch));
@@ -87,7 +87,7 @@ public class XMLExtractorImplTest extends TestCase {
     public void testGetPropertiesByClass() throws IllegalStateException, ClientProtocolException, IOException
     {
 		String artistUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf#Artist";
-		Model model = this.extractor.parseRdf(XMLExtractorImpl.ONTOLOGY_URL);
+		Model model = this.extractor.parseRdf(Extractor.ONTOLOGY_URL);
 		Resource res = model.getResource(artistUri);
 		assertFalse(this.extractor.getPropertiesByClass(res).isEmpty());
     }*/

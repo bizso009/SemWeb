@@ -8,7 +8,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.sparql.engine.http.QueryExceptionHTTP;
 
-public class DBpediaExtractorImpl extends XMLExtractorImpl implements DBpediaExtractor {
+public class DBpediaExtractorImpl extends Extractor implements DBpediaExtractor {
 	
 	private String service = "http://dbpedia.org/sparql";
 	

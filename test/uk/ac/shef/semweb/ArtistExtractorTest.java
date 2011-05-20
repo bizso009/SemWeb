@@ -25,7 +25,7 @@ public class ArtistExtractorTest extends TestCase
 	{
 		String ontologyUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf";
 		String xmlUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/471/xml";
-		XMLExtractorImpl xmlExtractorImpl = new XMLExtractorImpl();
+		Extractor xmlExtractorImpl = new Extractor();
 		try 
 		{
 			Model model = xmlExtractorImpl.parseRdf(ontologyUrl);
