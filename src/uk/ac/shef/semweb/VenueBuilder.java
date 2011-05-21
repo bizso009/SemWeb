@@ -21,12 +21,12 @@ public class VenueBuilder extends RdfBuilder
     public void extractXml()
     {
         this.venueRes = this.ontology.createResource(getUri());
-        venueRes.addProperty(RDF.type, this.venueClas);
+        this.venueRes.addProperty(RDF.type, this.properties.venueClas);
 
-        venueRes.addProperty(this.websiteProp, getSingleProp(this.websiteNode));
-        venueRes.addProperty(this.nameProp, getSingleProp(this.nameNode));
-        venueRes.addProperty(this.descriptionProp, getSingleProp(this.descriptionNode));
-        venueRes.addProperty(this.imageProp, getSingleProp(this.imageNode));
+        this.venueRes.addProperty(this.properties.websiteProp, getSingleProp(this.websiteNode));
+        this.venueRes.addProperty(this.properties.nameProp, getSingleProp(this.nameNode));
+        this.venueRes.addProperty(this.properties.descriptionProp, getSingleProp(this.descriptionNode));
+        this.venueRes.addProperty(this.properties.imageProp, getSingleProp(this.imageNode));
 
         //add gigs
         for (int i = 0; i < this.gigNodes.getLength(); i++ )
@@ -34,10 +34,10 @@ public class VenueBuilder extends RdfBuilder
             Node gigNode = this.gigNodes.item(i);
 
             Resource gigRes = this.ontology.createResource(getUrlAttr(gigNode));
-            gigRes.addProperty(RDF.type, this.gigClas);
-            gigRes.addProperty(this.titleProp, getSingleProp(gigNode));
+            gigRes.addProperty(RDF.type, this.properties.gigClas);
+            gigRes.addProperty(this.properties.titleProp, getSingleProp(gigNode));
 
-            venueRes.addProperty(this.gigProp, gigRes);
+            this.venueRes.addProperty(this.properties.gigProp, gigRes);
 
         }
 
@@ -54,7 +54,7 @@ public class VenueBuilder extends RdfBuilder
         while (rs.hasNext())
         {
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
-            this.venueRes.addProperty(this.categoryProp, dbpediaDescription(res));
+            this.venueRes.addProperty(this.properties.categoryProp, dbpediaDescription(res));
         }
         Extractor.delay();
 
@@ -63,7 +63,7 @@ public class VenueBuilder extends RdfBuilder
         while (rs.hasNext())
         {
             Resource res = rs.next().get(this.dbpediaVAR).asResource();
-            this.venueRes.addProperty(this.wikiPageProp, res.toString());
+            this.venueRes.addProperty(this.properties.wikiPageProp, res.toString());
         }
         Extractor.delay();
 
@@ -71,7 +71,7 @@ public class VenueBuilder extends RdfBuilder
         while (rs.hasNext())
         {
             Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
-            this.venueRes.addProperty(this.geoLatProp, new Float(res.getFloat()).toString());
+            this.venueRes.addProperty(this.properties.geoLatProp, new Float(res.getFloat()).toString());
         }
         Extractor.delay();
         
@@ -79,7 +79,7 @@ public class VenueBuilder extends RdfBuilder
         while (rs.hasNext())
         {
             Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
-            this.venueRes.addProperty(this.geoLonProp, new Float(res.getFloat()).toString());
+            this.venueRes.addProperty(this.properties.geoLonProp, new Float(res.getFloat()).toString());
         }
         Extractor.delay();
     }

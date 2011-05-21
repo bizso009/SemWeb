@@ -45,7 +45,7 @@ public class Extractor implements XMLExtractor
     {
         try
         {
-            Model ontology = parseRdf(ONTOLOGY_URL);
+            Model ontology = readRdf(ONTOLOGY_URL);
 
             List<String> urls = readFile(INPUT_PATH);
             for (String url : urls)
@@ -66,7 +66,7 @@ public class Extractor implements XMLExtractor
                     System.out.println(" -- NOT XML");
                     continue;
                 }
-                Document xml = loadXml(entity.getContent());
+                Document xml = readXml(entity.getContent());
                 RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
                 extractor.extract();
                 System.out.println(" -- DONE");
@@ -133,10 +133,11 @@ public class Extractor implements XMLExtractor
         return urls;
     }
 
-    public Document loadXml(InputStream is) throws SAXException, IOException, ParserConfigurationException
+    public Document readXml(InputStream is) throws SAXException, IOException, ParserConfigurationException
     {
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
         domFactory.setNamespaceAware(true); // never forget this!
+//        domFactory.setValidating(true);
         DocumentBuilder builder = domFactory.newDocumentBuilder();
         Document doc = builder.parse(is);
         return doc;
@@ -162,23 +163,19 @@ public class Extractor implements XMLExtractor
         return entity;
     }
 
-    public Model parseRdf(String ontologyUrl) throws IllegalStateException, ClientProtocolException, IOException
-    {
+    public Model readRdf(InputStream in){
         Model model = ModelFactory.createDefaultModel();
-
-        // use the FileManager to find the input file
-        InputStream in = openUrl(ontologyUrl).getContent();
-        if (in == null)
-        {
-        	System.out.println("Invalid URL");
-            throw new IllegalArgumentException("File: " + ontologyUrl + " not found");
-        }
-
+        
         // read the RDF/XML file
         model.read(in, null);
         model.setNsPrefix("com4280", RdfBuilder.RDF_BASE);
-
+        
         return model;
+        
+    }
+    public Model readRdf(String ontologyUrl) throws IllegalStateException, ClientProtocolException, IOException
+    {
+        return readRdf(openUrl(ontologyUrl).getContent());
     }
 
     @Override

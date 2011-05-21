@@ -17,7 +17,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Resource;
 
 
 public class ExtractorTest extends TestCase {
@@ -56,7 +55,7 @@ public class ExtractorTest extends TestCase {
     
     public void testParseRdf() throws IllegalStateException, ClientProtocolException, IOException
     {
-		Model model = this.extractor.parseRdf(Extractor.ONTOLOGY_URL);
+		Model model = this.extractor.readRdf(Extractor.ONTOLOGY_URL);
 		assertNotNull(model);	
     }
     
@@ -100,7 +99,7 @@ public class ExtractorTest extends TestCase {
     {
 		String xmlPath = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/415/xml";
 		InputStream is = this.extractor.openUrl(xmlPath).getContent();
-		Document doc = this.extractor.loadXml(is);
+		Document doc = this.extractor.readXml(is);
 		assertNotNull(doc);
     }
 }

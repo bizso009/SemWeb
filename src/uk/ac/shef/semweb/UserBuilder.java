@@ -27,11 +27,11 @@ public class UserBuilder extends RdfBuilder
     {
 
         this.userRes = this.ontology.createResource(getUri());
-        this.userRes.addProperty(RDF.type, this.userClas);
+        this.userRes.addProperty(RDF.type, this.properties.userClas);
 
         String username = getSingleProp(this.usernameNode);
         this.twitterXml += username;
-        this.userRes.addProperty(this.usernameProp, username);
+        this.userRes.addProperty(this.properties.usernameProp, username);
 
         //add vote events
         for (int i = 0; i < this.voteEventNodes.getLength(); i++ )
@@ -39,21 +39,21 @@ public class UserBuilder extends RdfBuilder
             Node voteEventNode = this.voteEventNodes.item(i);
 
             Resource voteEventRes = this.ontology.createResource(getUri() + "#VoteEvent" + i);
-            voteEventRes.addProperty(RDF.type, this.voteEventClas);
-            this.userRes.addProperty(this.voteEventProp, voteEventRes);
+            voteEventRes.addProperty(RDF.type, this.properties.voteEventClas);
+            this.userRes.addProperty(this.properties.voteEventProp, voteEventRes);
 
             NodeList voteEventChildren = voteEventNode.getChildNodes();
 
             short gigNodeIdx = 1;
             Node gigNode = voteEventChildren.item(gigNodeIdx);
             Resource gigRes = this.ontology.createResource(getUrlAttr(gigNode));
-            gigRes.addProperty(RDF.type, this.gigClas);
-            gigRes.addProperty(this.titleProp, getSingleProp(gigNode));
-            voteEventRes.addProperty(this.gigProp, gigRes);
+            gigRes.addProperty(RDF.type, this.properties.gigClas);
+            gigRes.addProperty(this.properties.titleProp, getSingleProp(gigNode));
+            voteEventRes.addProperty(this.properties.gigProp, gigRes);
 
             short voteNodeIdx = 3;
             Node voteNode = voteEventChildren.item(voteNodeIdx);
-            voteEventRes.addProperty(this.voteProp, getSingleProp(voteNode));
+            voteEventRes.addProperty(this.properties.voteProp, getSingleProp(voteNode));
 
         }
         // TODO get from twitter
@@ -66,11 +66,11 @@ public class UserBuilder extends RdfBuilder
         try
         {
             Extractor ex = new Extractor();
-            this.xml = ex.loadXml(ex.openUrl(this.twitterXml).getContent());
-            this.userRes.addProperty(this.imageProp, getSingleProp(queryTag("profile_image_url").item(0)));
+            this.xml = ex.readXml(ex.openUrl(this.twitterXml).getContent());
+            this.userRes.addProperty(this.properties.imageProp, getSingleProp(queryTag("profile_image_url").item(0)));
             NodeList tweetNodes = queryTag("text");
             for (int i=0; i<tweetNodes.getLength(); i++){
-                this.userRes.addProperty(this.tweetProp, getSingleProp(tweetNodes.item(i)));
+                this.userRes.addProperty(this.properties.tweetProp, getSingleProp(tweetNodes.item(i)));
             }   
             
         }

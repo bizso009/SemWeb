@@ -22,15 +22,15 @@ public class GigBuilder extends RdfBuilder
     public void extractXml() 
     {
         Resource gigRes = this.ontology.createResource(getUri());
-        gigRes.addProperty(RDF.type, this.gigClas);
+        gigRes.addProperty(RDF.type, this.properties.gigClas);
 
-        gigRes.addProperty(this.dateProp, getSingleProp(this.dateNode));
-        gigRes.addProperty(this.titleProp, getSingleProp(this.titleNode));
+        gigRes.addProperty(this.properties.dateProp, getSingleProp(this.dateNode));
+        gigRes.addProperty(this.properties.titleProp, getSingleProp(this.titleNode));
         
         Resource artistRes = this.ontology.createResource(getUrlAttr(this.artistNode));
-        artistRes.addProperty(this.nameProp, getSingleProp(this.artistNode));
+        artistRes.addProperty(this.properties.nameProp, getSingleProp(this.artistNode));
         
-        gigRes.addProperty(this.artistProp, artistRes);
+        gigRes.addProperty(this.properties.artistProp, artistRes);
 
     }
     @Override
