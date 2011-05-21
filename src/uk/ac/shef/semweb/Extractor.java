@@ -74,6 +74,12 @@ public class Extractor implements XMLExtractor
             }
             System.out.println("Writing ontology");
             ontology.write(new FileOutputStream(outputPath), OUTPUT_MODE);
+            if (withDBPedia){
+                System.out.println("Generating html");
+                new IndexGenerator(ontology).generate();
+                new ArtistGenerator(ontology).generate();
+                new VenueGenerator(ontology).generate();
+            }
         }
         catch (Exception e)
         {

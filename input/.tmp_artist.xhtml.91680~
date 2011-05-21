@@ -3,13 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>DB</title>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
-</script>
-        <script type="text/javascript" src="../../js/map.js">
-        	
-        </script>
+        <script scr="/js/map.js"></script>
     </head>
-    <body onload="init()">
+    <body>
     	<img id="image" />
     	<div id="description" />
     	<ul id="albums" />
@@ -17,7 +13,7 @@
     	<ul id="homeTowns" />
     	<ul id="tweets" />
     	<ul id="locations" />
-    	<div id="map" style="width:100%; height:100%" />
+    	<div id="map" />
         
     </body>
 </html>
