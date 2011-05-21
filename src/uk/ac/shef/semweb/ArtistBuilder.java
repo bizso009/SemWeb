@@ -3,11 +3,9 @@ package uk.ac.shef.semweb;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class ArtistBuilder extends RdfBuilder 
 {

@@ -12,6 +12,7 @@ public class VenueBuilder extends RdfBuilder
 {
 
     private Resource venueRes;
+    private ResultSet rs;
     public VenueBuilder(Model ontology, Document xml, String url, boolean withWebSerives)
     {
         super(ontology, xml, url, withWebSerives);
@@ -48,38 +49,58 @@ public class VenueBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        String dbLink = getSingleProp(this.dbpediaNode);
+        dbpediaLink = getSingleProp(this.dbpediaNode);
 
-        ResultSet rs = this.queryDBpedia(dbLink, this.dbpediaCategory);
+        setCategory();
+
+
+        setWikiPage();
+
+        setGeoLat();
+        
+        setGeoLon();
+    }
+
+    private void setGeoLon()
+    {
+        rs = this.queryDBpedia(dbpediaLink, this.dbpediaGeoLon);
         while (rs.hasNext())
         {
-            Resource res = rs.next().get(this.dbpediaVAR).asResource();
-            this.venueRes.addProperty(this.properties.categoryProp, dbpediaDescription(res));
+            Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
+            this.venueRes.addProperty(this.properties.geoLonProp, new Float(res.getFloat()).toString());
         }
         Extractor.delay();
+    }
 
-
-        rs = this.queryDBpedia(dbLink, this.dbpediaWikiPage);
-        while (rs.hasNext())
-        {
-            Resource res = rs.next().get(this.dbpediaVAR).asResource();
-            this.venueRes.addProperty(this.properties.wikiPageProp, res.toString());
-        }
-        Extractor.delay();
-
-        rs = this.queryDBpedia(dbLink, this.dbpediaGeoLat);
+    private void setGeoLat()
+    {
+        rs = this.queryDBpedia(dbpediaLink, this.dbpediaGeoLat);
         while (rs.hasNext())
         {
             Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
             this.venueRes.addProperty(this.properties.geoLatProp, new Float(res.getFloat()).toString());
         }
         Extractor.delay();
-        
-        rs = this.queryDBpedia(dbLink, this.dbpediaGeoLon);
+    }
+
+    private void setWikiPage()
+    {
+        rs = this.queryDBpedia(dbpediaLink, this.dbpediaWikiPage);
         while (rs.hasNext())
         {
-            Literal res = rs.next().get(this.dbpediaVAR).asLiteral();
-            this.venueRes.addProperty(this.properties.geoLonProp, new Float(res.getFloat()).toString());
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.venueRes.addProperty(this.properties.wikiPageProp, res.toString());
+        }
+        Extractor.delay();
+    }
+
+    private void setCategory()
+    {
+        rs = this.queryDBpedia(dbpediaLink, this.dbpediaCategory);
+        while (rs.hasNext())
+        {
+            Resource res = rs.next().get(this.dbpediaVAR).asResource();
+            this.venueRes.addProperty(this.properties.categoryProp, dbpediaDescription(res));
         }
         Extractor.delay();
     }

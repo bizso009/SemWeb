@@ -8,10 +8,6 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class GigBuilder extends RdfBuilder 
 {
 
-    public GigBuilder(Model ontology, Document xml, String url) 
-    {
-    	super(ontology, xml, url, false);
-    }
     
     public GigBuilder(Model ontology, Document xml, String url, boolean withDBpedia) 
     {
