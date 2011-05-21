@@ -1,4 +1,4 @@
-package semweb.twitter;
+package uk.ac.shef.semweb.twitter;
 
 /**
  *
