@@ -1,8 +1,12 @@
 package uk.ac.shef.semweb;
 
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.apache.http.client.ClientProtocolException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -10,6 +14,9 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class UserBuilder extends RdfBuilder
 {
 
+    private Resource userRes;
+    private String   twitterXml = "http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=";
+     
     public UserBuilder(Model ontology, Document xml, String url, boolean withWebServices)
     {
         super(ontology, xml, url, withWebServices);
@@ -19,10 +26,12 @@ public class UserBuilder extends RdfBuilder
     public void extractXml()
     {
 
-        Resource userRes = this.ontology.createResource(getUri());
-        userRes.addProperty(RDF.type, this.userClas);
+        this.userRes = this.ontology.createResource(getUri());
+        this.userRes.addProperty(RDF.type, this.userClas);
 
-        userRes.addProperty(this.usernameProp, getSingleProp(this.usernameNode));
+        String username = getSingleProp(this.usernameNode);
+        this.twitterXml += username;
+        this.userRes.addProperty(this.usernameProp, username);
 
         //add vote events
         for (int i = 0; i < this.voteEventNodes.getLength(); i++ )
@@ -31,7 +40,7 @@ public class UserBuilder extends RdfBuilder
 
             Resource voteEventRes = this.ontology.createResource(getUri() + "#VoteEvent" + i);
             voteEventRes.addProperty(RDF.type, this.voteEventClas);
-            userRes.addProperty(this.voteEventProp, voteEventRes);
+            this.userRes.addProperty(this.voteEventProp, voteEventRes);
 
             NodeList voteEventChildren = voteEventNode.getChildNodes();
 
@@ -45,7 +54,6 @@ public class UserBuilder extends RdfBuilder
             short voteNodeIdx = 3;
             Node voteNode = voteEventChildren.item(voteNodeIdx);
             voteEventRes.addProperty(this.voteProp, getSingleProp(voteNode));
-            
 
         }
         // TODO get from twitter
@@ -55,8 +63,23 @@ public class UserBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        // TODO Auto-generated method stub
-        
+        try
+        {
+            Extractor ex = new Extractor();
+            this.xml = ex.loadXml(ex.openUrl(this.twitterXml).getContent());
+            this.userRes.addProperty(this.imageProp, getSingleProp(queryTag("profile_image_url").item(0)));
+            NodeList tweetNodes = queryTag("text");
+            for (int i=0; i<tweetNodes.getLength(); i++){
+                this.userRes.addProperty(this.tweetProp, getSingleProp(tweetNodes.item(i)));
+            }   
+            
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error connecting to Twitter");
+            e.printStackTrace();
+            
+        }
     }
 
 }

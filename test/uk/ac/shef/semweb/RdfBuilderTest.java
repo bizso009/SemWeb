@@ -71,7 +71,7 @@ public class RdfBuilderTest extends TestCase
         Document doc = impl.loadXml(impl.openUrl(testUrl).getContent());
 
         this.builder = new UserBuilder(model, doc, testUrl,true);
-        this.builder.extractXml();
+        this.builder.extract();
 
         Resource res = model.getResource(testUri);
         assertNotNull(res);
@@ -87,6 +87,9 @@ public class RdfBuilderTest extends TestCase
 
         assertTrue(voteEventRes.hasProperty(this.builder.voteProp));
         assertTrue(gigRes.hasProperty(this.builder.titleProp));
+            
+        assertEquals("http://a0.twimg.com/sticky/default_profile_images/default_profile_1_normal.png",res.getProperty(this.builder.imageProp).getString());
+        assertEquals(17,res.listProperties(this.builder.tweetProp).toSet().size());
 
     }
 

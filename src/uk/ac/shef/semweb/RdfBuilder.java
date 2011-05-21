@@ -47,6 +47,7 @@ public abstract class RdfBuilder
     protected final Property      categoryProp;
     protected final Property      geoLatProp;
     protected final Property      geoLonProp;
+    protected final Property      tweetProp;
 
     protected final Resource      albumClas;
     protected final Resource      voteEventClas;
@@ -109,6 +110,7 @@ public abstract class RdfBuilder
         this.categoryProp = this.ontology.getProperty(RDF_BASE + "hasCategory");
         this.geoLatProp = this.ontology.getProperty(RDF_BASE + "hasGeoLat");
         this.geoLonProp = this.ontology.getProperty(RDF_BASE + "hasGeoLon");
+        this.tweetProp = this.ontology.getProperty(RDF_BASE + "hasTweet");
 
         this.albumClas = this.ontology.getResource(RDF_BASE + "Album");
         this.voteEventClas = this.ontology.getResource(RDF_BASE + "VoteEvent");
