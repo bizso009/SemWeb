@@ -29,7 +29,8 @@ public abstract class HtmlGenerator
     protected Model              model;
     protected IntelWebProperties properties;
     protected Document           template;
-    protected String name;
+    protected String             templatePath;
+    protected String             name;
     public static final String   DIR = "output/website/";
 
     public HtmlGenerator(Model model)
@@ -40,9 +41,14 @@ public abstract class HtmlGenerator
 
     public abstract void generate() throws TransformerException, FileNotFoundException, SAXException, IOException, ParserConfigurationException;
 
+    protected String encode(String fileName)
+    {
+        return DIR + (fileName.replaceAll("[^A-Za-z]+", "_")) + ".html";
+    }
+
     protected void write() throws TransformerException
     {
-        String fileName = DIR + (name.replaceAll("[^A-Za-z]+", "_")) + ".html";
+        String fileName = encode(name);
         Source source = new DOMSource(template);
         File file = new File(fileName);
         Result result = new StreamResult(file);

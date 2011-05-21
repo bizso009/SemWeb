@@ -15,11 +15,11 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class ArtistGenerator extends HtmlGenerator
 {
-    public static final String ARTIST_TEMPLATE = "input/artist.xhtml";
     private Resource           artist;
     public ArtistGenerator(Model model)
     {
         super(model);
+        templatePath = "input/artist.xhtml";
 
     }
 
@@ -35,7 +35,7 @@ public class ArtistGenerator extends HtmlGenerator
             
             System.out.println("Writing artist: " + name);
 
-            template = new Extractor().readXml(new FileInputStream(ARTIST_TEMPLATE));
+            template = new Extractor().readXml(new FileInputStream(templatePath));
 
             setImage();
 
@@ -100,7 +100,7 @@ public class ArtistGenerator extends HtmlGenerator
                 Resource maybeVenue = venuesAndVoteEvents.next();
                 if (maybeVenue.hasProperty(RDF.type, properties.venueClas))
                 {
-                    Element ul = getElementById(template, "gigs");
+                    Element ul = getElementById(template, "locations");
                     Element listItem = template.createElement("li");
                     ul.appendChild(listItem);
                     Element spanItem1 = template.createElement("span");

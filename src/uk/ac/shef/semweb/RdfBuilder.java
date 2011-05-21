@@ -48,7 +48,7 @@ public abstract class RdfBuilder
 
     protected final String        dbpediaGenre          = "http://dbpedia.org/ontology/genre";
     protected final String        dbpediaAssociatedBand = "http://dbpedia.org/ontology/associatedBand";
-    protected final String        dbpediaWikiPage       = "http://dbpedia.org/ontology/wikiPageExternalLink";
+    protected final String        dbpediaWikiPage       = "http://xmlns.com/foaf/0.1/page";
     protected final String        dbpediaHomeTown       = "http://dbpedia.org/ontology/hometown";
     protected final String        dbpediaCategory       = "http://purl.org/dc/terms/subject";
     protected final String        dbpediaGeoLat         = "http://www.w3.org/2003/01/geo/wgs84_pos#lat";
