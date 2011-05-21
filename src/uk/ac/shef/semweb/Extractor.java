@@ -40,6 +40,7 @@ public class Extractor implements XMLExtractor
         extractor.extract(true,DBPEDIA_TRIPLES_PATH);
         
     }
+    
     public void extract(boolean withDBPedia, String outputPath)
     {
         try
@@ -169,6 +170,7 @@ public class Extractor implements XMLExtractor
         InputStream in = openUrl(ontologyUrl).getContent();
         if (in == null)
         {
+        	System.out.println("Invalid URL");
             throw new IllegalArgumentException("File: " + ontologyUrl + " not found");
         }
 
