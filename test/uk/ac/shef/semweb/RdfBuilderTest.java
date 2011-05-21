@@ -125,7 +125,7 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601";
         Document doc = impl.readXml(impl.openUrl(testUrl).getContent());
 
-        this.builder = new GigBuilder(model, doc, testUrl);
+        this.builder = new GigBuilder(model, doc, testUrl,false);
         this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
