@@ -155,6 +155,7 @@ public abstract class RdfBuilder
         this.withWebServices = withWebServices;
 
         this.properties = new IntelWebProperties(ontology);
+        this.nodes = new IntelWebNodes();
 
   
 
