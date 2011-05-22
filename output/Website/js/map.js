@@ -2,7 +2,7 @@
 function init(){
     var centerLatLng = new google.maps.LatLng(53.417,-1.444);
     var myOptions = {
-        zoom: 4,
+        zoom: 8,
         center: centerLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     }
@@ -17,6 +17,9 @@ function init(){
             position: myLatlng
         });
         marker.setMap(map);
+		if (myLatlng) {
+			map.setCenter(myLatlng);
+		}
     };
     
     

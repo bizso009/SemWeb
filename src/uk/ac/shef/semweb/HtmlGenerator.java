@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
@@ -33,7 +31,6 @@ import uk.ac.shef.semweb.RdfBuilder.IntelWebProperties;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public abstract class HtmlGenerator {
@@ -109,16 +106,16 @@ public abstract class HtmlGenerator {
         // override
     }
 
-    protected void setWikiPages() throws DOMException, UnsupportedEncodingException {
-        StmtIterator wikiPages = res.listProperties(properties.wikiPageProp);
-        while (wikiPages.hasNext()) {
-            Element span = template.createElement("span");
-            Element a = template.createElement("a");
-            span.appendChild(a);
-            String link = wikiPages.next().getLiteral().toString();
-            a.setAttribute("href", link);
-            a.setTextContent(URLDecoder.decode(link.substring(link.lastIndexOf("/") + 1).replaceAll("_", " "),"UTF-8"));
-            getElementById(template, "wikiPages").appendChild(span);
+    protected void setWikiPages() throws DOMException {
+        Element span = template.createElement("span");
+        Element a = template.createElement("a");
+        span.appendChild(a);
+        String link = "";
+        if (res.getProperty(properties.wikiPageProp)!=null){
+            link = res.getProperty(properties.wikiPageProp).getLiteral().toString();
         }
+        a.setAttribute("href", link);
+        a.setTextContent(name);
+        getElementById(template, "wikiPages").appendChild(span);
     }
 }

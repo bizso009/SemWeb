@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -45,7 +46,7 @@ public class ArtistGenerator extends HtmlGenerator {
         StmtIterator albums = res.listProperties(properties.albumProp);
         while (albums.hasNext()) {
             Element listItem = template.createElement("li");
-            listItem.setTextContent(albums.next().getResource().getProperty(properties.titleProp).getString());
+            listItem.setTextContent(StringEscapeUtils.unescapeHtml(albums.next().getResource().getProperty(properties.titleProp).getString()));
             getElementById(template, "albums").appendChild(listItem);
         }
     }
