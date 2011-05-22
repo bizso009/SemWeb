@@ -2,6 +2,7 @@
 *.properties
 /build
 /nbproject
+/dist
 /manifest.mf
 /.classpath
 /.project
