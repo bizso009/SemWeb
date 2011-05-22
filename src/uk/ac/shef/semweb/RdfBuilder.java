@@ -54,7 +54,8 @@ public abstract class RdfBuilder
     protected final String        dbpediaGeoLat         = "http://www.w3.org/2003/01/geo/wgs84_pos#lat";
     protected final String        dbpediaGeoLon         = "http://www.w3.org/2003/01/geo/wgs84_pos#long";
     protected final String        dbpediaVAR            = "arg";
-    protected String                dbpediaLink;
+    protected String              dbpediaLink;
+
     public static class IntelWebProperties
     {
 

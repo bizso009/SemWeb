@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
-public class Extractor implements XMLExtractor
+public class Extractor 
 {
     // TODO redundant
     public static final String INPUT_PATH   = "input/internalLinks.txt";
@@ -184,18 +184,7 @@ public class Extractor implements XMLExtractor
         return readRdf(openUrl(ontologyUrl).getContent());
     }
 
-    @Override
-    public String getRdfTriples(String url)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void saveAllTriples(String URLListFileName, String OutputFileName)
-    {
-        // TODO Auto-generated method stub
-    }
+    
 
     /*
      * public Set<Resource> getClassResources(Model model) { ResIterator it =

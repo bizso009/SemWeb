@@ -125,7 +125,7 @@ public class RdfBuilderTest extends TestCase
         String testUri = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/601";
         Document doc = impl.readXml(impl.openUrl(testUrl).getContent());
 
-        this.builder = new GigBuilder(model, doc, testUrl);
+        this.builder = new GigBuilder(model, doc, testUrl, false);
         this.builder.extractXml();
 
         Resource res = model.getResource(testUri);
@@ -159,7 +159,7 @@ public class RdfBuilderTest extends TestCase
         assertTrue(albumRes.hasProperty(builder.properties.titleProp));
         
         assertEquals("Alternative rock",res.getProperty(builder.properties.genreProp).getString());
-        assertEquals(2,res.listProperties(builder.properties.wikiPageProp).toSet().size());
+        assertEquals(1,res.listProperties(builder.properties.wikiPageProp).toSet().size());
         assertEquals(2,res.listProperties(builder.properties.homeTownProp).toSet().size());
         
         testUrl = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=artist/663/xml";
