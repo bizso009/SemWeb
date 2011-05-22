@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+
+import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -42,7 +44,7 @@ public class IndexGenerator extends HtmlGenerator
            Element artistsElem = getElementById(template, "artists");
            while (artists.hasNext()){
                Resource artist = artists.next();
-               String disp = artist.getProperty(properties.nameProp).getString();
+               String disp = StringEscapeUtils.unescapeHtml(artist.getProperty(properties.nameProp).getString());
                String link = disp.replaceAll("[^A-Za-z]+", "_")+".html";
                Element li = template.createElement("li");
                artistsElem.appendChild(li);

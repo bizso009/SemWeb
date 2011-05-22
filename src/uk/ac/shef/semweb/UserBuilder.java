@@ -1,5 +1,6 @@
 package uk.ac.shef.semweb;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -66,7 +67,7 @@ public class UserBuilder extends RdfBuilder
             this.userRes.addProperty(this.properties.imageProp, getSingleProp(queryTag("profile_image_url").item(0)));
             NodeList tweetNodes = queryTag("text");
             for (int i=0; i<tweetNodes.getLength(); i++){
-                this.userRes.addProperty(this.properties.tweetProp, getSingleProp(tweetNodes.item(i)));
+                this.userRes.addProperty(this.properties.tweetProp, StringEscapeUtils.unescapeHtml(getSingleProp(tweetNodes.item(i))));
             }   
             
         }

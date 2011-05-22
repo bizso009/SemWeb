@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>DB</title>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
-</script>
-        <script type="text/javascript" src="../../js/map.js">
-        	
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
         </script>
+        <script type="text/javascript" src="js/map.js">
+        </script>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        </link>
     </head>
     <body onload="init()">
-    	<img id="image" />
-    	<div id="description" />
-    	<ul id="albums" />
-    	<ul id="wikiPages" />
-    	<ul id="homeTowns" />
-    	<ul id="tweets" />
-    	<ul id="locations" />
-    	<div id="map" style="width:100%; height:100%" />
-        
+        <div id="wrapper">
+            <h1><span id="wikiPages" /></h1><hr/>
+            <div id="description">
+                <div id="box">
+                    <img id="image" />
+                    <div>
+                        <h4>Albums</h4>
+                        <hr/><ul id="albums" /><h4>Hometowns</h4>
+                        <hr/><ul id="homeTowns" />
+                    </div>
+                </div>
+            </div><h2 class="clear">Tweets and Gigs</h2>
+            <hr/>
+            <div>
+                <div id="map">
+                </div>
+				<ul id="locations" />
+                <ul id="tweets" />
+            </div>
+            <div class="clear">
+            </div>
+        </div>
     </body>
 </html>

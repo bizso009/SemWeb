@@ -974,7 +974,7 @@
   <com4280:User rdf:about="http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user2">
     <com4280:hasImage>http://a1.twimg.com/sticky/default_profile_images/default_profile_0_normal.png</com4280:hasImage>
     <com4280:hasTweet>Why is it that I can't find Def Leppard mp3s?! I can only seem to find "tributes" grrrrr :(</com4280:hasTweet>
-    <com4280:hasTweet>Guns N' Roses &amp;gt; Rock In Rio &amp;gt; 2011 &amp;gt; See you there ! !</com4280:hasTweet>
+    <com4280:hasTweet>Guns N' Roses &gt; Rock In Rio &gt; 2011 &gt; See you there ! !</com4280:hasTweet>
     <com4280:hasTweet>Not Afraid. Eminem.</com4280:hasTweet>
     <com4280:hasTweet>Estranged - Guns N' Roses #NP</com4280:hasTweet>
     <com4280:hasTweet>Guns N' Roses – November Rain now playing on BBCR2</com4280:hasTweet>
@@ -2064,6 +2064,7 @@
     </com4280:hasVoteEvent>
     <com4280:hasUsername>intelliUser8</com4280:hasUsername>
     <com4280:hasTweet>British Sea Power were great on Letterman last night... http://bit.ly/dL3zB3 At first I wasn't into this song, but I love it now.</com4280:hasTweet>
+    <com4280:hasTweet>#nowplaying Avril Lavigne - everything back but you &lt;3</com4280:hasTweet>
     <com4280:hasTweet>@nowplaying ...keep holding on by avril lavigne...</com4280:hasTweet>
     <com4280:hasTweet>@xGoodMourningx thats how i feel about enya and cold play.</com4280:hasTweet>
     <com4280:hasTweet>#Nowplaying S&amp;M by @rihanna .. I'm totally addicted to it, SLAMMING IT LOUD!!! - 'I may be bad but I'm perfectly good at it' *Evil smile* ;)</com4280:hasTweet>
@@ -2091,7 +2092,6 @@
         <com4280:hasGig rdf:resource="http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=gig/385"/>
       </com4280:VoteEvent>
     </com4280:hasVoteEvent>
-    <com4280:hasTweet>#nowplaying Avril Lavigne - everything back but you &amp;lt;3</com4280:hasTweet>
     <com4280:hasTweet>Watch British Sea Power - "Who's In Control" on Vimeo! http://vimeo.com</com4280:hasTweet>
     <com4280:hasVoteEvent>
       <com4280:VoteEvent rdf:about="http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/%3fq=users/user8#VoteEvent0">
