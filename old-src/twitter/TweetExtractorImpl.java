@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package semweb.twitter;
+package uk.ac.shef.semweb.twitter;
 
 import java.io.InputStream;
 import java.net.URL;

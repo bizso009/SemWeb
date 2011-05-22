@@ -25,14 +25,14 @@ public class UserBuilder extends RdfBuilder
         this.userRes = this.ontology.createResource(getUri());
         this.userRes.addProperty(RDF.type, this.properties.userClas);
 
-        String username = getSingleProp(this.usernameNode);
+        String username = getSingleProp(this.nodes.usernameNode);
         this.twitterXml += username;
         this.userRes.addProperty(this.properties.usernameProp, username);
 
         //add vote events
-        for (int i = 0; i < this.voteEventNodes.getLength(); i++ )
+        for (int i = 0; i < this.nodes.voteEventNodes.getLength(); i++ )
         {
-            Node voteEventNode = this.voteEventNodes.item(i);
+            Node voteEventNode = this.nodes.voteEventNodes.item(i);
 
             Resource voteEventRes = this.ontology.createResource(getUri() + "#VoteEvent" + i);
             voteEventRes.addProperty(RDF.type, this.properties.voteEventClas);

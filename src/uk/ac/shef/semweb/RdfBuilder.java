@@ -17,7 +17,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 public abstract class RdfBuilder
 {
-    protected static final String URI_BASE              = "http://poplar.dcs.shef.ac.uk";
+    public static final String    URI_BASE              = "http://poplar.dcs.shef.ac.uk";
     public static final String    RDF_BASE              = "http://poplar.dcs.shef.ac.uk/~u0082/intelweb2/intelweb.rdf#";
     public static final String    DBPEDIA_SERVICE       = "http://dbpedia.org/sparql";
 
@@ -28,23 +28,7 @@ public abstract class RdfBuilder
 
     //TODO push fields down to subclasses
     protected IntelWebProperties  properties;
-
-    protected final Node          titleNode;
-    protected final Node          genreNode;
-    protected final Node          imageNode;
-    protected final Node          usernameNode;
-    protected final Node          websiteNode;
-    protected final Node          nameNode;
-    protected final Node          descriptionNode;
-    protected final Node          biographyNode;
-    protected final Node          artistNode;
-    protected final Node          dateNode;
-    protected final Node          dbpediaNode;
-
-    protected final NodeList      trackNodes;
-    protected final NodeList      gigNodes;
-    protected final NodeList      voteEventNodes;
-    protected final NodeList      albumNodes;
+    protected IntelWebNodes       nodes;
 
     protected final String        dbpediaGenre          = "http://dbpedia.org/ontology/genre";
     protected final String        dbpediaAssociatedBand = "http://dbpedia.org/ontology/associatedBand";
@@ -56,6 +40,43 @@ public abstract class RdfBuilder
     protected final String        dbpediaVAR            = "arg";
     protected String              dbpediaLink;
 
+    public class IntelWebNodes {
+        protected final Node          titleNode;
+        protected final Node          genreNode;
+        protected final Node          imageNode;
+        protected final Node          usernameNode;
+        protected final Node          websiteNode;
+        protected final Node          nameNode;
+        protected final Node          descriptionNode;
+        protected final Node          biographyNode;
+        protected final Node          artistNode;
+        protected final Node          dateNode;
+        protected final Node          dbpediaNode;
+
+        protected final NodeList      trackNodes;
+        protected final NodeList      gigNodes;
+        protected final NodeList      voteEventNodes;
+        protected final NodeList      albumNodes;
+
+        public IntelWebNodes() {
+            this.titleNode = queryTag("title").item(0);
+            this.genreNode = queryTag("genre").item(0);
+            this.imageNode = queryTag("image").item(0);
+            this.websiteNode = queryTag("website").item(0);
+            this.usernameNode = queryTag("twitterID").item(0);
+            this.nameNode = queryTag("name").item(0);
+            this.biographyNode = queryTag("biography").item(0);
+            this.descriptionNode = queryTag("description").item(0);
+            this.artistNode = queryTag("artist").item(0);
+            this.dateNode = queryTag("date").item(0);
+            this.dbpediaNode = queryTag("dbpedia").item(0);
+
+            this.trackNodes = queryTag("track");
+            this.gigNodes = queryTag("gig");
+            this.voteEventNodes = queryTag("voteEvent");
+            this.albumNodes = queryTag("album");
+        }
+    }
     public static class IntelWebProperties
     {
 
@@ -89,6 +110,7 @@ public abstract class RdfBuilder
         public final Resource gigClas;
         public final Resource venueClas;
 
+        
         public IntelWebProperties(Model ontology)
         {
 
@@ -134,22 +156,7 @@ public abstract class RdfBuilder
 
         this.properties = new IntelWebProperties(ontology);
 
-        this.titleNode = queryTag("title").item(0);
-        this.genreNode = queryTag("genre").item(0);
-        this.imageNode = queryTag("image").item(0);
-        this.websiteNode = queryTag("website").item(0);
-        this.usernameNode = queryTag("twitterID").item(0);
-        this.nameNode = queryTag("name").item(0);
-        this.biographyNode = queryTag("biography").item(0);
-        this.descriptionNode = queryTag("description").item(0);
-        this.artistNode = queryTag("artist").item(0);
-        this.dateNode = queryTag("date").item(0);
-        this.dbpediaNode = queryTag("dbpedia").item(0);
-
-        this.trackNodes = queryTag("track");
-        this.gigNodes = queryTag("gig");
-        this.voteEventNodes = queryTag("voteEvent");
-        this.albumNodes = queryTag("album");
+  
 
         //framework bug workaround
         ARQ.getContext().setTrue(ARQ.useSAX);

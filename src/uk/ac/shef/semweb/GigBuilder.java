@@ -20,11 +20,11 @@ public class GigBuilder extends RdfBuilder
         Resource gigRes = this.ontology.createResource(getUri());
         gigRes.addProperty(RDF.type, this.properties.gigClas);
 
-        gigRes.addProperty(this.properties.dateProp, getSingleProp(this.dateNode));
-        gigRes.addProperty(this.properties.titleProp, getSingleProp(this.titleNode));
+        gigRes.addProperty(this.properties.dateProp, getSingleProp(this.nodes.dateNode));
+        gigRes.addProperty(this.properties.titleProp, getSingleProp(this.nodes.titleNode));
         
-        Resource artistRes = this.ontology.createResource(getUrlAttr(this.artistNode));
-        artistRes.addProperty(this.properties.nameProp, getSingleProp(this.artistNode));
+        Resource artistRes = this.ontology.createResource(getUrlAttr(this.nodes.artistNode));
+        artistRes.addProperty(this.properties.nameProp, getSingleProp(this.nodes.artistNode));
         
         gigRes.addProperty(this.properties.artistProp, artistRes);
 

@@ -23,13 +23,13 @@ public class ArtistBuilder extends RdfBuilder
         this.artistRes = this.ontology.createResource(getUri());
         this.artistRes.addProperty(RDF.type, this.properties.artistClas);
 
-        this.artistRes.addProperty(this.properties.nameProp, getSingleProp(this.titleNode));
-        this.artistRes.addProperty(this.properties.biographyProp, getSingleProp(this.biographyNode));
-        this.artistRes.addProperty(this.properties.imageProp, getSingleProp(this.imageNode));
-        this.artistRes.addProperty(this.properties.websiteProp, getSingleProp(this.websiteNode));
+        this.artistRes.addProperty(this.properties.nameProp, getSingleProp(this.nodes.titleNode));
+        this.artistRes.addProperty(this.properties.biographyProp, getSingleProp(this.nodes.biographyNode));
+        this.artistRes.addProperty(this.properties.imageProp, getSingleProp(this.nodes.imageNode));
+        this.artistRes.addProperty(this.properties.websiteProp, getSingleProp(this.nodes.websiteNode));
 
-        for (int i=0; i<this.albumNodes.getLength(); i++){
-            Node albumNode = this.albumNodes.item(i);
+        for (int i=0; i<this.nodes.albumNodes.getLength(); i++){
+            Node albumNode = this.nodes.albumNodes.item(i);
             Resource albumRes = this.ontology.createResource(getUrlAttr(albumNode));
             albumRes.addProperty(RDF.type, this.properties.albumClas);
             this.artistRes.addProperty(this.properties.albumProp, albumRes);
@@ -44,7 +44,7 @@ public class ArtistBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        dbpediaLink = getSingleProp(this.dbpediaNode);
+        dbpediaLink = getSingleProp(this.nodes.dbpediaNode);
         
         setGenre();
         setAssociatedBand();

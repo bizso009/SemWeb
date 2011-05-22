@@ -1,4 +1,4 @@
-package semweb.builder;
+package uk.ac.shef.semweb.builder;
 
 import java.io.File;
 

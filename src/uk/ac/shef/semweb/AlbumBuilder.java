@@ -22,13 +22,13 @@ public class AlbumBuilder extends RdfBuilder
         Resource albumRes = this.ontology.createResource(getUri());
         albumRes.addProperty(RDF.type, this.properties.albumClas);
 
-        albumRes.addProperty(this.properties.titleProp, getSingleProp(this.titleNode));
-        albumRes.addProperty(this.properties.genreProp, getSingleProp(this.genreNode));
-        albumRes.addProperty(this.properties.imageProp, getSingleProp(this.imageNode));
+        albumRes.addProperty(this.properties.titleProp, getSingleProp(this.nodes.titleNode));
+        albumRes.addProperty(this.properties.genreProp, getSingleProp(this.nodes.genreNode));
+        albumRes.addProperty(this.properties.imageProp, getSingleProp(this.nodes.imageNode));
 
-        for (int i = 0; i < this.trackNodes.getLength(); i++ )
+        for (int i = 0; i < this.nodes.trackNodes.getLength(); i++ )
         {
-            Node trackNode = this.trackNodes.item(i);
+            Node trackNode = this.nodes.trackNodes.item(i);
             albumRes.addProperty(this.properties.trackProp, getSingleProp(trackNode));
         }
     }

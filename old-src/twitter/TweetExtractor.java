@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package uk.ac.shef.semweb;
+=======
+package uk.ac.shef.semweb.twitter;
+>>>>>>> 70bbf423ca571db117cd609f58da84978c7c4307
 
 /**
  *

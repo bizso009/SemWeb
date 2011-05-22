@@ -126,6 +126,7 @@ public class RdfBuilderTest extends TestCase
         Document doc = impl.readXml(impl.openUrl(testUrl).getContent());
 
         this.builder = new GigBuilder(model, doc, testUrl, false);
+
         this.builder.extractXml();
 
         Resource res = model.getResource(testUri);

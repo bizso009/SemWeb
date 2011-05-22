@@ -24,15 +24,15 @@ public class VenueBuilder extends RdfBuilder
         this.venueRes = this.ontology.createResource(getUri());
         this.venueRes.addProperty(RDF.type, this.properties.venueClas);
 
-        this.venueRes.addProperty(this.properties.websiteProp, getSingleProp(this.websiteNode));
-        this.venueRes.addProperty(this.properties.nameProp, getSingleProp(this.nameNode));
-        this.venueRes.addProperty(this.properties.descriptionProp, getSingleProp(this.descriptionNode));
-        this.venueRes.addProperty(this.properties.imageProp, getSingleProp(this.imageNode));
+        this.venueRes.addProperty(this.properties.websiteProp, getSingleProp(this.nodes.websiteNode));
+        this.venueRes.addProperty(this.properties.nameProp, getSingleProp(this.nodes.nameNode));
+        this.venueRes.addProperty(this.properties.descriptionProp, getSingleProp(this.nodes.descriptionNode));
+        this.venueRes.addProperty(this.properties.imageProp, getSingleProp(this.nodes.imageNode));
 
         //add gigs
-        for (int i = 0; i < this.gigNodes.getLength(); i++ )
+        for (int i = 0; i < this.nodes.gigNodes.getLength(); i++ )
         {
-            Node gigNode = this.gigNodes.item(i);
+            Node gigNode = this.nodes.gigNodes.item(i);
 
             Resource gigRes = this.ontology.createResource(getUrlAttr(gigNode));
             gigRes.addProperty(RDF.type, this.properties.gigClas);
@@ -49,7 +49,7 @@ public class VenueBuilder extends RdfBuilder
     @Override
     public void extractWebServices()
     {
-        dbpediaLink = getSingleProp(this.dbpediaNode);
+        dbpediaLink = getSingleProp(this.nodes.dbpediaNode);
 
         setCategory();
 
