@@ -114,14 +114,21 @@ public class Extractor
                     System.out.println(" -- NOT XML");
                     continue;
                 }
-                // Get content of the document.
-                Document xml = readXml(entity.getContent());
-                // Create an instance of RdfBuilder to extract the data.
-                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
-                // Extract the data.
-                extractor.extract();
-                System.out.println(" -- DONE");
-                delay();
+                
+                try
+                {
+	                // Get content of the document.
+	                Document xml = readXml(entity.getContent());
+	                // Create an instance of RdfBuilder to extract the data.
+	                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
+	                // Extract the data.
+	                extractor.extract();
+	                System.out.println(" -- DONE");
+	                delay();
+                }catch (Exception e)
+                {
+                	 System.out.println(" -- HTTP ERROR - SKIPPING");
+                }
             }
             System.out.println("Writing ontology");
             // Write rdf triples to the output file.
