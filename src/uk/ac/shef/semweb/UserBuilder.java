@@ -1,5 +1,7 @@
 package uk.ac.shef.semweb;
 
+
+// Add necessary packages.
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -8,24 +10,54 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
+
+/**
+ * This class is used to extract properties of a user from an XML file.
+ * @author Team BDM
+ *
+ */
 public class UserBuilder extends RdfBuilder
 {
 
+	/**
+	 * This resource will be added to the ontology with all the user details.
+	 */
     private Resource userRes;
+    
+    /**
+     * This string holds the url for the twitter xml content.
+     */
     private String   twitterXml = "http://api.twitter.com/1/statuses/user_timeline.xml?screen_name=";
-     
+   
+    
+    /**
+	 * Contructor for the class
+	 * @param ontology This argument is a Jena Model.
+	 * @param xml This argument takes in an xml document.
+	 * @param url This argument takes in the url of the xml file.
+	 * @param withWebServices This argument determines whether dbPedia and twitter information is extracted.
+	 */
     public UserBuilder(Model ontology, Document xml, String url, boolean withWebServices)
     {
+    	// Call to super constructor.
         super(ontology, xml, url, withWebServices);
     }
 
+    /**
+     * This function extracts information from an xml file and used this information to 
+     * populate the ontology.
+     */
     @Override
     public void extractXml()
     {
 
+    	// Create new resource using the uri of the xml file.
+    	// Add this resource to the ontology.
         this.userRes = this.ontology.createResource(getUri());
+        // Add type property to the current resource.
         this.userRes.addProperty(RDF.type, this.properties.userClas);
 
+        // Add remaining properties to the current resource.
         String username = getSingleProp(this.nodes.usernameNode);
         this.twitterXml += username;
         this.userRes.addProperty(this.properties.usernameProp, username);
@@ -53,10 +85,12 @@ public class UserBuilder extends RdfBuilder
             voteEventRes.addProperty(this.properties.voteProp, getSingleProp(voteNode));
 
         }
-        // TODO get from twitter
-        //getImage 
     }
 
+    /**
+     * This function is used obtain any information from dbPedia and twitter if the information is
+     * present.
+     */
     @Override
     public void extractWebServices()
     {
@@ -66,7 +100,8 @@ public class UserBuilder extends RdfBuilder
             this.xml = ex.readXml(ex.openUrl(this.twitterXml).getContent());
             this.userRes.addProperty(this.properties.imageProp, getSingleProp(queryTag("profile_image_url").item(0)));
             NodeList tweetNodes = queryTag("text");
-            for (int i=0; i<tweetNodes.getLength(); i++){
+            for (int i=0; i<tweetNodes.getLength(); i++)
+            {
                 this.userRes.addProperty(this.properties.tweetProp, StringEscapeUtils.unescapeHtml(getSingleProp(tweetNodes.item(i))));
             }   
             
