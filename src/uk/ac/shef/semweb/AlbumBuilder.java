@@ -49,7 +49,8 @@ public class AlbumBuilder extends RdfBuilder
         albumRes.addProperty(properties.genreProp, getSingleProp(nodes.genreNode));
         albumRes.addProperty(properties.imageProp, getSingleProp(nodes.imageNode));
 
-        for (int i = 0; i < nodes.trackNodes.getLength(); i++) {
+        for (int i = 0; i < nodes.trackNodes.getLength(); i++) 
+        {
             Node trackNode = nodes.trackNodes.item(i);
             albumRes.addProperty(properties.trackProp, getSingleProp(trackNode));
         }
@@ -60,7 +61,8 @@ public class AlbumBuilder extends RdfBuilder
      * present.
      */
     @Override
-    public void extractWebServices() {
+    public void extractWebServices() 
+    {
         // nothing to extract
 
     }
