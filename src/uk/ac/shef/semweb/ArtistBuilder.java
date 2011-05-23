@@ -17,7 +17,14 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ArtistBuilder extends RdfBuilder 
 {
 	// Declare private variables
+	/**
+	 * This resource will be added to the ontology with all the artist details.
+	 */
 	private Resource artistRes;
+	
+	/**
+	 * This ResultSet contains the dbPedia results for an artist.
+	 */
 	private ResultSet rs;
 	
 	/**
