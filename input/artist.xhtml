@@ -7,6 +7,11 @@
 		</script>
         <script type="text/javascript" src="js/map.js">
 		</script>
+		<script type="text/javascript">
+			if (navigator.appName == 'Microsoft Internet Explorer'){
+				alert("Website Not Compatible with MSIE\nSorry about this, but there wasnt enough time to design IE specific css");
+			}
+		</script>
 		<title>GigBase2.0</title>
 	</head>
 	<body onload="init()">
@@ -24,7 +29,7 @@
 			<div id="center">
 				<div id="trace">Home :: Artist Profile</div>
 				<div class="line"></div>
-				<h2>Artist and Venues Listing</h2>
+				<h2>Artist Listing</h2>
 				<div id="wrapper">
 					<h1><span id="wikiPages" /></h1><hr/>
 					<div id="description">
@@ -51,6 +56,8 @@
 					</table>
 					<div class="clear">
 					</div>
+					
+					<h2 class="clear">Location</h2><hr/>
 					<div>
 						<div id="map">
 						</div>
@@ -62,7 +69,7 @@
 				<div class="clear"></div>
 			<div id="footer">
 				<div class="line"></div>
-				Copyright "The Journal" 2011-2012
+				Copyright "GigBase2.0" 2011-2012
 			</div>
 		</div>
 	</body>

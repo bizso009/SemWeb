@@ -131,12 +131,19 @@ body {
 
 .index #footer{
 	padding-top:30px;
+	margin-bottom:-220px;
 	font-size:11px;
 }
 
 .artist #footer{
-	padding-top:250px;
-	margin-bottom:-230px;
+	padding-top:290px;
+	margin-bottom:-220px;
+	font-size:11px;
+}
+
+.venue #footer{
+	padding-top:300px;
+	margin-bottom:-220px;
 	font-size:11px;
 }
 
@@ -204,6 +211,11 @@ td{
 #tweets td{
 	font-size:11px;
 	height:13px;
+}
+
+#image{
+	height:300px;
+	width:400px;
 }
 
 #wikiPages {

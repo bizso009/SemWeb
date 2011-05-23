@@ -63,8 +63,10 @@ public class VenueGenerator extends HtmlGenerator
         StmtIterator categories = res.listProperties(properties.categoryProp);
         while (categories.hasNext()) 
         {
-            Element listItem = template.createElement("li");
-            listItem.setTextContent(categories.next().getLiteral().toString());
+            Element listItem = template.createElement("tr");
+            Element td = template.createElement("td");
+            td.setTextContent(categories.next().getLiteral().toString());
+            listItem.appendChild(td);
             getElementById(template, "categories").appendChild(listItem);
         }
 
