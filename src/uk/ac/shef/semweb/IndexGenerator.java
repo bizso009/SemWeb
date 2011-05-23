@@ -66,12 +66,14 @@ public class IndexGenerator extends HtmlGenerator
                Resource artist = artists.next();
                String disp = StringEscapeUtils.unescapeHtml(artist.getProperty(properties.nameProp).getString());
                String link = disp.replaceAll("[^A-Za-z]+", "_")+".html";
-               Element li = template.createElement("li");
-               artistsElem.appendChild(li);
+               Element tr = template.createElement("tr");
+               artistsElem.appendChild(tr);
+               Element td = template.createElement("td");
+               tr.appendChild(td);
                Element a = template.createElement("a");
                a.setAttribute("href", link);
                a.setTextContent(disp);
-               li.appendChild(a);
+               td.appendChild(a);
            }
     }
 
@@ -87,12 +89,14 @@ public class IndexGenerator extends HtmlGenerator
                Resource artist = venues.next();
                String disp = artist.getProperty(properties.nameProp).getString();
                String link = disp.replaceAll("[^A-Za-z]+", "_")+".html";
-               Element li = template.createElement("li");
-               venuesElem.appendChild(li);
+               Element tr = template.createElement("tr");
+               venuesElem.appendChild(tr);
+               Element td = template.createElement("td");
+               tr.appendChild(td);
                Element a = template.createElement("a");
                a.setAttribute("href", link);
                a.setTextContent(disp);
-               li.appendChild(a);
+               td.appendChild(a);
            }
     }
 

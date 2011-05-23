@@ -1,5 +1,6 @@
 package uk.ac.shef.semweb;
 
+// Add necessary imports.
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -15,27 +16,99 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.engine.http.QueryExceptionHTTP;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+/**
+ * This class is the superclass that handles the population of the ontology.
+ * @author Team BDM.
+ *
+ */
 public abstract class RdfBuilder
 {
+	/**
+	 * This class instantiates the nodes that are used in the XML files.
+	 * @author Team BDM.
+	 *
+	 */
     public class IntelWebNodes
     {
-        protected final NodeList albumNodes;
+    	/**
+    	 * Artist Node
+    	 */
         protected final Node     artistNode;
+        
+        /**
+         * Biography Node.
+         */
         protected final Node     biographyNode;
+        
+        /**
+         * Date Node.
+         */
         protected final Node     dateNode;
+        
+        /**
+         * DBPedia Node.
+         */
         protected final Node     dbpediaNode;
+        
+        /**
+         * Description Node.
+         */
         protected final Node     descriptionNode;
+        
+        /**
+         * Genre Node.
+         */
         protected final Node     genreNode;
-        protected final NodeList gigNodes;
+        
+        /**
+         * Image Node.
+         */
         protected final Node     imageNode;
+        
+        /**
+         * Name Node.
+         */
         protected final Node     nameNode;
+        
+        /**
+         * Username Node.
+         */
+        protected final Node     usernameNode;
+        
+        /**
+         * Website Node.
+         */
+        protected final Node     websiteNode;
+        
+        /**
+         * Title Node.
+         */
         protected final Node     titleNode;
 
+        
+        /**
+         * Album nodes list.
+         */
+        protected final NodeList albumNodes;
+        
+        /**
+         * Track nodes list.
+         */
         protected final NodeList trackNodes;
-        protected final Node     usernameNode;
+        
+        /**
+         * Gig nodes list.
+         */
+        protected final NodeList gigNodes;
+        
+        /**
+         * Vote Event nodes list.
+         */
         protected final NodeList voteEventNodes;
-        protected final Node     websiteNode;
 
+        /**
+         * Class constructor
+         */
         public IntelWebNodes()
         {
             titleNode = queryTag("title").item(0);
@@ -57,39 +130,158 @@ public abstract class RdfBuilder
         }
     }
 
+    /**
+     * This class handles the properties for the ontology.
+     * @author Team BDM
+     *
+     */
     public static class IntelWebProperties
     {
 
+    	/**
+    	 * Album class.
+    	 */
         public final Resource albumClas;
+        
+        /**
+         * Album Property.
+         */
         public final Property albumProp;
+        
+        /**
+         * Artist Class.
+         */
         public final Resource artistClas;
+        
+        /**
+         * Artist Property.
+         */
         public final Property artistProp;
+        
+        /**
+         * Associated Band Property.
+         */
         public final Property associatedBandProp;
+        
+        /**
+         * Biography Property.
+         */
         public final Property biographyProp;
+        
+        /**
+         * Category Property.
+         */
         public final Property categoryProp;
+        
+        /**
+         * Date Property.
+         */
         public final Property dateProp;
+        
+        /**
+         * Description Property.
+         */
         public final Property descriptionProp;
+        
+        /**
+         * Genre Property.
+         */
         public final Property genreProp;
+        
+        /**
+         * Geo Latitude Property.
+         */
         public final Property geoLatProp;
+        
+        /**
+         * Geo Longitude Property.
+         */
         public final Property geoLonProp;
+        
+        /**
+         * Gig Class.
+         */
         public final Resource gigClas;
+        
+        /**
+         * Gig Property.
+         */
         public final Property gigProp;
+        
+        /**
+         * Home Town Property.
+         */
         public final Property homeTownProp;
+        
+        /**
+         * Image Property.
+         */
         public final Property imageProp;
+        
+        /**
+         * Name property.
+         */
         public final Property nameProp;
+        
+        /**
+         * Title property.
+         */
         public final Property titleProp;
+        
+        /**
+         * Track Property.
+         */
         public final Property trackProp;
+        
+        /**
+         * Tweet Property.
+         */
         public final Property tweetProp;
+        
+        /**
+         * User Class.
+         */
         public final Resource userClas;
+        
+        /**
+         * User Name Property.
+         */
         public final Property usernameProp;
 
+        /**
+         * Venue Class.
+         */
         public final Resource venueClas;
+        
+        /**
+         * Vote Event Class.
+         */
         public final Resource voteEventClas;
+        
+        /**
+         * Vote Event Property.
+         */
         public final Property voteEventProp;
+        
+        /**
+         * Vote Property.
+         */
         public final Property voteProp;
+        
+        /**
+         * Website Property.
+         */
         public final Property websiteProp;
+        
+        /**
+         * Wikipedia Page Property.
+         */
         public final Property wikiPageProp;
 
+        /**
+         * Class Constructor.
+         * @param ontology This takes in a Jena Model.
+         */
         public IntelWebProperties(Model ontology)
         {
 
