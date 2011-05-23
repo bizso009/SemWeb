@@ -112,6 +112,7 @@ body {
 	padding:10px;
 	min-height: 300px;
 	text-align:left;
+	margin-bottom:230px;
 }
 
 #center #artists{
@@ -128,7 +129,14 @@ body {
 	font-size:11px;
 }
 
-#footer{
+.index #footer{
+	padding-top:30px;
+	font-size:11px;
+}
+
+.artist #footer{
+	padding-top:250px;
+	margin-bottom:-230px;
 	font-size:11px;
 }
 
@@ -189,10 +197,15 @@ td{
 
 /* Custom */
 #map {
-	width:30%;
-	height:30%;
-	float:right;
+	width:100%px;
+	height:200px;
 }
+
+#tweets td{
+	font-size:11px;
+	height:13px;
+}
+
 #wikiPages {
 	display:inline;
 	list-style:none;
@@ -200,17 +213,13 @@ td{
 #wikiPages a:link {
 	text-decoration:none;
 }
-body{
-	padding:0;
-	margin:0;
-	background-color:#E1E1E1;
-}
+
 #box {
 	display:none;
 	float:right;
 	margin-left:10px;
 	margin-bottom:10px;
-	max-width:30%;
+	max-width:40%;
 	padding-left:5px;
 	padding-bottom:5px;
 	display:inline-block;

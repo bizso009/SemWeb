@@ -10,13 +10,13 @@
 		<title>GigBase2.0</title>
 	</head>
 	<body onload="init()">
-		<div id="content">
+		<div id="content" class="artist">
 			<div id="header">
 				<div id="logo">GigBase2.0</div>
 				<div id="status">Intelligent Web!</div>
 				<div id="topmenu">
 					<ul>
-						<li class="roundtop"><a href="#">Home</a></li>
+						<li class="roundtop"><a href="index.html">Home</a></li>
 					</ul>
 				</div>
 			</div>
@@ -31,21 +31,32 @@
 						<div id="box">
 							<img id="image" />
 							<div>
-								<h4>Albums</h4>
-								<hr/><ul id="albums" /><h4>Hometowns</h4>
-								<hr/><ul id="homeTowns" />
+								<table id="albums">
+									<tr class="title">
+										<td>Albums</td>
+									</tr>
+								</table>
+								<table id="homeTowns">
+									<tr class="title">
+										<td>Hometowns</td>
+									</tr>
+								</table>
 							</div>
 						</div>
-					</div><h2 class="clear">Tweets and Gigs</h2>
-					<hr/>
+					</div>
+					<table id="tweets">
+						<tr class="title">
+							<td>Tweets and Gigs</td>
+						</tr>
+					</table>
+					<div class="clear">
+					</div>
 					<div>
 						<div id="map">
 						</div>
 						<ul id="locations" />
-						<ul id="tweets" />
 					</div>
-					<div class="clear">
-					</div>
+					
 				</div>
 			</div>
 				<div class="clear"></div>

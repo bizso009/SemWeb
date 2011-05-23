@@ -69,8 +69,10 @@ public class ArtistGenerator extends HtmlGenerator
         StmtIterator albums = res.listProperties(properties.albumProp);
         while (albums.hasNext()) 
         {
-            Element listItem = template.createElement("li");
-            listItem.setTextContent(StringEscapeUtils.unescapeHtml(albums.next().getResource().getProperty(properties.titleProp).getString()));
+            Element listItem = template.createElement("tr");
+            Element td = template.createElement("td");
+            td.setTextContent(StringEscapeUtils.unescapeHtml(albums.next().getResource().getProperty(properties.titleProp).getString()));
+            listItem.appendChild(td);
             getElementById(template, "albums").appendChild(listItem);
         }
     }
@@ -116,8 +118,10 @@ public class ArtistGenerator extends HtmlGenerator
         StmtIterator homeTowns = res.listProperties(properties.homeTownProp);
         while (homeTowns.hasNext()) 
         {
-            Element listItem = template.createElement("li");
-            listItem.setTextContent(homeTowns.next().getLiteral().getString());
+            Element listItem = template.createElement("tr");
+            Element td = template.createElement("td");
+            td.setTextContent(homeTowns.next().getLiteral().getString());
+            listItem.appendChild(td);
             getElementById(template, "homeTowns").appendChild(listItem);
         }
     }
@@ -138,8 +142,10 @@ public class ArtistGenerator extends HtmlGenerator
                 String tweet = tweets.next().getString();
                 if (tweet.toLowerCase().contains(name.toLowerCase())) 
                 {
-                    Element listItem = template.createElement("li");
-                    listItem.setTextContent(tweet);
+                    Element listItem = template.createElement("tr");
+                    Element td = template.createElement("td");
+                    td.setTextContent(tweet);
+                    listItem.appendChild(td);
                     getElementById(template, "tweets").appendChild(listItem);
                 }
             }

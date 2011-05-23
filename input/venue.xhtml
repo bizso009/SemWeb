@@ -1,36 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>DB</title>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
-        </script>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/main.css"/> 
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+		</script>
         <script type="text/javascript" src="js/map.js">
-        </script>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        </link>
-    </head>
-    <body onload="init()">
-        <div id="wrapper">
-            <h1><span id="wikiPages" /></h1><hr/>
-            <div id="description">
-                <div id="box">
-                    <img id="image" />
-                    <div>
-                        <h4>Categories</h4>
-                        <hr/><ul id="categories" />
-						
-                    </div>
-                </div>
-            </div>
-			<h2 class="clear">Location</h2><hr/>
-			<div>
-			<ul id="locations" />
-			<div id="map" />
+		</script>
+		<title>GigBase2.0</title>
+	</head>
+	<body onload="init()">
+		<div id="content">
+			<div id="header">
+				<div id="logo">GigBase2.0</div>
+				<div id="status">Intelligent Web!</div>
+				<div id="topmenu">
+					<ul>
+						<li class="roundtop"><a href="index.html">Home</a></li>
+					</ul>
+				</div>
 			</div>
-			            <div class="clear">
-            </div>
-
-        </div>
-    </body>
+			<div class="clear"></div>
+			<div id="center">
+				<div id="trace">Home :: Artist Profile</div>
+				<div class="line"></div>
+				<h2>Artist and Venues Listing</h2>
+				<div id="wrapper">
+					<h1><span id="wikiPages" /></h1><hr/>
+					<div id="description">
+						<div id="box">
+							<img id="image" />
+							<div>
+								<h4>Categories</h4>
+								<hr/><ul id="categories" />
+								
+							</div>
+						</div>
+					</div>
+					<h2 class="clear">Location</h2><hr/>
+					<div>
+						<ul id="locations" />
+						<div id="map" />
+					</div>
+				</div>
+			</div>
+				<div class="clear"></div>
+			<div id="footer">
+				<div class="line"></div>
+				Copyright "GigBase2.0" 2011-2012
+			</div>
+		</div>
+	</body>
 </html>
