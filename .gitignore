@@ -3,6 +3,7 @@
 /build
 /nbproject
 /dist
+/bin
 /manifest.mf
 /.classpath
 /.project
