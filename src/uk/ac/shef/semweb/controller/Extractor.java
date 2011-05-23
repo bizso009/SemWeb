@@ -104,7 +104,7 @@ public class Extractor
         	// Read the ontology into memory.
             Model ontology = readRdf(ONTOLOGY_URL);
 
-            // Go through the list of URLs in the input file and process each xml in turn.
+            // Go through the list of URLs in the input file and process each url in turn.
             List<String> urls = readFile(INPUT_PATH);
             for (String url : urls)
             {
@@ -130,9 +130,9 @@ public class Extractor
                     // Get content of the document.
                     Document xml = readXml(entity.getContent());
                     // Create an instance of RdfBuilder to extract the data.
-                    RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
+                    RdfBuilder builder = createRdfBuilder(ontology, xml, url, withDBPedia);
                     // Extract the data.
-                    extractor.extract();
+                    builder.extract();
                     System.out.println(" -- DONE");
                 } 
                 catch (Exception e){
@@ -181,12 +181,12 @@ public class Extractor
      * @param ontology Takes in an ontology
      * @param xml Takes in an xml document.
      * @param url Takes in a url of the xml document.
-     * @param withWebservices Takes in a boolean value determining whether dbPedia extraction is done.
+     * @param withWebservices Takes in a boolean value determining whether dbPedia and twitter extraction is done.
      * @return returns an RdfBuilder instance.
      */
     public RdfBuilder createRdfBuilder(Model ontology, Document xml, String url, boolean withWebservices)
     {
-    	// Create instance of the appropriate superclass.
+    	// Create instance of the appropriate subclass.
         if (url.contains("album"))
         {
             return new AlbumBuilder(ontology, xml, url, withWebservices);
@@ -257,7 +257,7 @@ public class Extractor
     }
 
     /**
-     * This function opens a connection the URL.
+     * This function opens a connection to the URL.
      * @param url Takes in a URL.
      * @return Returns a connection to the given URL.
      * @throws ClientProtocolException
