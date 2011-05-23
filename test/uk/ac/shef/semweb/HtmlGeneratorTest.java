@@ -29,6 +29,17 @@ public class HtmlGeneratorTest extends TestCase {
             e.printStackTrace();
         }
     }
+    
+    public void testGenerateIndex() throws SAXException, IOException, ParserConfigurationException, TransformerException {
+        generator = new IndexGenerator(model);
+
+        generator.generate();
+        // venue/328/
+        InputStream indexFile = new FileInputStream("output/website/index.html");
+        Document indexXml = ex.readXml(indexFile);
+        assertEquals(13, generator.getElementById(indexXml, "artists").getElementsByTagName("td").getLength());
+        assertEquals(8, generator.getElementById(indexXml, "venues").getElementsByTagName("td").getLength());
+    }
 
     public void testGenerateArtists() throws SAXException, IOException, ParserConfigurationException, TransformerException {
         generator = new ArtistGenerator(model);
@@ -46,17 +57,6 @@ public class HtmlGeneratorTest extends TestCase {
         artistXml = ex.readXml(artistFile);
         assertTrue(2 < generator.getElementById(artistXml, "tweets").getElementsByTagName("li").getLength());
 
-    }
-
-    public void testGenerateIndex() throws SAXException, IOException, ParserConfigurationException, TransformerException {
-        generator = new IndexGenerator(model);
-
-        generator.generate();
-        // venue/328/
-        InputStream indexFile = new FileInputStream("output/website/index.html");
-        Document indexXml = ex.readXml(indexFile);
-        assertEquals(13, generator.getElementById(indexXml, "artists").getElementsByTagName("li").getLength());
-        assertEquals(8, generator.getElementById(indexXml, "venues").getElementsByTagName("li").getLength());
     }
 
     public void testGenerateVenues() throws SAXException, IOException, ParserConfigurationException, TransformerException {
