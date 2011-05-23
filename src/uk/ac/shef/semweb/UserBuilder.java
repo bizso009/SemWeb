@@ -13,6 +13,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 /**
  * This class is used to extract properties of a user from an XML file.
+ * These properties will be then used to populate an ontology.
  * @author Team BDM
  *
  */
