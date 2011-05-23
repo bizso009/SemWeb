@@ -2,5 +2,5 @@
 HOW TO RUN
 **************
 
-1. DoubleClick SemWeb.jar
+1. Double click SemWeb.jar
 2. Done!
