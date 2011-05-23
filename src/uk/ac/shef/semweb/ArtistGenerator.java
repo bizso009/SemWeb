@@ -1,5 +1,6 @@
 package uk.ac.shef.semweb;
 
+// Add necessary imports.
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -16,17 +17,35 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-public class ArtistGenerator extends HtmlGenerator {
+/**
+ * This class generates the artist pages.
+ * @author Team BDM
+ *
+ */
+public class ArtistGenerator extends HtmlGenerator 
+{
 
-    public ArtistGenerator(Model model) {
+	/**
+	 * Class constructor.
+	 * @param model Takes in a Jena model.
+	 */
+    public ArtistGenerator(Model model) 
+    {
+    	// Call the super constructor.
         super(model);
+        // Set the type and the template path.
         templatePath = "input/artist.xhtml";
         type = "Artist";
 
     }
 
+    /**
+     * This function gets the resources of type Artist from the ontology and then sends these details to the HTML output.
+     * @param resources A list of resources.
+     */
     @Override
-    public void setResource(ResIterator resources) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, TransformerException {
+    public void setResource(ResIterator resources) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException, TransformerException 
+    {
 
         super.setResource(resources);
         setAlbums();
@@ -42,23 +61,37 @@ public class ArtistGenerator extends HtmlGenerator {
 
     }
 
-    private void setAlbums() {
+    /**
+     * This function goes through the list of album properties in an ontology and then writes this to the artist template.
+     */
+    private void setAlbums() 
+    {
         StmtIterator albums = res.listProperties(properties.albumProp);
-        while (albums.hasNext()) {
-            Element listItem = template.createElement("li");
-            listItem.setTextContent(StringEscapeUtils.unescapeHtml(albums.next().getResource().getProperty(properties.titleProp).getString()));
+        while (albums.hasNext()) 
+        {
+            Element listItem = template.createElement("tr");
+            Element td = template.createElement("td");
+            td.setTextContent(StringEscapeUtils.unescapeHtml(albums.next().getResource().getProperty(properties.titleProp).getString()));
+            listItem.appendChild(td);
             getElementById(template, "albums").appendChild(listItem);
         }
     }
 
-    private void setGigs() {
+    /**
+     * This function goes through the list of gig properties in an ontology and then writes this to the artist template.
+     */
+    private void setGigs() 
+    {
         ResIterator gigs = model.listResourcesWithProperty(properties.artistProp, res);
-        while (gigs.hasNext()) {
+        while (gigs.hasNext()) 
+        {
             Resource gig = gigs.next();
             ResIterator venuesAndVoteEvents = model.listResourcesWithProperty(properties.gigProp, gig);
-            while (venuesAndVoteEvents.hasNext()) {
+            while (venuesAndVoteEvents.hasNext()) 
+            {
                 Resource maybeVenue = venuesAndVoteEvents.next();
-                if (maybeVenue.hasProperty(RDF.type, properties.venueClas)) {
+                if (maybeVenue.hasProperty(RDF.type, properties.venueClas)) 
+                {
                     Element ul = getElementById(template, "locations");
                     Element listItem = template.createElement("li");
                     ul.appendChild(listItem);
@@ -67,7 +100,8 @@ public class ArtistGenerator extends HtmlGenerator {
                     listItem.appendChild(spanItem1);
                     listItem.appendChild(spanItem2);
 
-                    if (maybeVenue.getProperty(properties.geoLatProp) != null) {
+                    if (maybeVenue.getProperty(properties.geoLatProp) != null)
+                    {
                         spanItem1.setTextContent(maybeVenue.getProperty(properties.geoLatProp).getString());
                         spanItem2.setTextContent(maybeVenue.getProperty(properties.geoLonProp).getString());
                     }
@@ -76,33 +110,54 @@ public class ArtistGenerator extends HtmlGenerator {
         }
     }
 
-    private void setHomeTown() {
+    /**
+     * This gets the homeTown property of the artist from the ontology and then writes this to the artist template.
+     */
+    private void setHomeTown() 
+    {
         StmtIterator homeTowns = res.listProperties(properties.homeTownProp);
-        while (homeTowns.hasNext()) {
-            Element listItem = template.createElement("li");
-            listItem.setTextContent(homeTowns.next().getLiteral().getString());
+        while (homeTowns.hasNext()) 
+        {
+            Element listItem = template.createElement("tr");
+            Element td = template.createElement("td");
+            td.setTextContent(homeTowns.next().getLiteral().getString());
+            listItem.appendChild(td);
             getElementById(template, "homeTowns").appendChild(listItem);
         }
     }
 
-    private void setTweets() {
+    /**
+     * This function goes through the tweets about an artist that are present in the ontology and then writes this to
+     * the artist template.
+     */
+    private void setTweets() 
+    {
         ResIterator users = model.listResourcesWithProperty(RDF.type, properties.userClas);
-        while (users.hasNext()) {
+        while (users.hasNext()) 
+        {
             Resource user = users.next();
             StmtIterator tweets = user.listProperties(properties.tweetProp);
-            while (tweets.hasNext()) {
+            while (tweets.hasNext()) 
+            {
                 String tweet = tweets.next().getString();
-                if (tweet.toLowerCase().contains(name.toLowerCase())) {
-                    Element listItem = template.createElement("li");
-                    listItem.setTextContent(tweet);
+                if (tweet.toLowerCase().contains(name.toLowerCase())) 
+                {
+                    Element listItem = template.createElement("tr");
+                    Element td = template.createElement("td");
+                    td.setTextContent(tweet);
+                    listItem.appendChild(td);
                     getElementById(template, "tweets").appendChild(listItem);
                 }
             }
         }
     }
 
+    /**
+     * This function gets the artist description from an ontology and then writes this to the artist template.
+     */
     @Override
-    protected void setDescription() {
+    protected void setDescription()
+    {
         getElementById(template, "description").appendChild(template.createTextNode(res.getProperty(properties.biographyProp).getString()));
 
     }

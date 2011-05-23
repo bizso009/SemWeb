@@ -1,8 +1,223 @@
-#map {
-	width:30%;
-	height:30%;
-	float:right;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* END OF CSS RESET  */
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background: #000;
+	text-align: center;
+}
+
+#content {
+	width:1048px;
+	margin: 0px auto;
+	padding:10px;
+	background: #fff;
+}
+
+#header {
+	height: 100px;
+	background: url(img/header_bg.jpg) top center;
+	position:relative;
+}
+
+#header #logo {
+	font-size:30px;
+	color:#fff;
+	float:left;
+	padding: 10px 0 0 20px;
+}
+
+#header #status {
+	background: #515151;
+	height: 20px;
+	position:relative;
+	right:40px;
+	float:right;
+	color:#fff;
+	font-size:16px;
+	padding:3px 20px 3px 20px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+#header #topmenu {
+	position:absolute;
+	bottom:0px;
+}
+
+#header #topmenu ul{
+	list-style-type: none;
+	height: 30px;
+	margin-left: 10px;
+}
+
+#header #topmenu li{
+	float:left;
+	margin: 0px 10px 0px 10px;
+	background: url(img/section_header.jpg);
+	line-height:35px;
+	width:100px;
+}
+
+#header #topmenu li a{
+	color:#515151;
+	text-decoration: none;
+}
+
+#center{
+	background: url(img/body_bg.jpg) repeat-x;
+	padding:10px;
+	min-height: 300px;
+	text-align:left;
+	margin-bottom:230px;
+}
+
+#center #artists{
+	float: left;
+	width:50%;
+}
+
+#center #venues{
+	float: right;
+	width:50%;
+}
+
+#center #trace{
+	font-size:11px;
+}
+
+.index #footer{
+	padding-top:30px;
+	margin-bottom:-220px;
+	font-size:11px;
+}
+
+.artist #footer{
+	padding-top:290px;
+	margin-bottom:-220px;
+	font-size:11px;
+}
+
+.venue #footer{
+	padding-top:300px;
+	margin-bottom:-220px;
+	font-size:11px;
+}
+
+/* Common elements 
+ * Dont edit below this line
+ */
+
+h2{
+	padding:20px;
+}
+ 
+.roundtop{
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	-webkit-border-top-left-radius:10px;
+	-webkit-border-top-right-radius:10px;
+}
+ 
+table{
+	width:100%;
+}
+
+tr.title{
+	background: url(img/section_header.jpg);
+	height:35px;
+	font-size:15px;
+	padding-top:20px;
+}
+
+tr{
+	text-indent:20px;
+}
+
+tr:nth-child(odd){ 
+	background-color:#eee; 
+}
+
+tr:nth-child(even){
+	background-color:#fff;
+}
+
+td{
+	line-height:35px;
+}
+
+.line{
+	width:100%;
+	height:1px;
+	background:#A2ADB1;
+	margin:5px 0px 5px 0px;
+}
+
+.clear{
+	clear:both;
+}
+
+/* Custom */
+#map {
+	width:100%px;
+	height:200px;
+}
+
+#tweets td{
+	font-size:11px;
+	height:13px;
+}
+
+#image{
+	height:300px;
+	width:400px;
+}
+
 #wikiPages {
 	display:inline;
 	list-style:none;
@@ -10,17 +225,13 @@
 #wikiPages a:link {
 	text-decoration:none;
 }
-body{
-	padding:0;
-	margin:0;
-	background-color:#E1E1E1;
-}
+
 #box {
 	display:none;
 	float:right;
 	margin-left:10px;
 	margin-bottom:10px;
-	max-width:30%;
+	max-width:40%;
 	padding-left:5px;
 	padding-bottom:5px;
 	display:inline-block;
@@ -47,3 +258,4 @@ body{
 #locations {
 	display:none;
 }
+
