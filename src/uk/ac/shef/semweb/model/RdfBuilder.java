@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.model;
 
 // Add necessary imports.
 import org.w3c.dom.Document;

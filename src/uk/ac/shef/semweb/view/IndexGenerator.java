@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.view;
 
 // Add necessary imports.
 import java.io.FileInputStream;
@@ -10,6 +10,9 @@ import javax.xml.transform.TransformerException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+
+import uk.ac.shef.semweb.controller.Extractor;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;

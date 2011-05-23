@@ -1,8 +1,11 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.model;
 
 // Add necessary imports.
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+
+import uk.ac.shef.semweb.controller.Extractor;
+
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;

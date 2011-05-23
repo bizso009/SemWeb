@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +15,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.junit.Before;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import uk.ac.shef.semweb.controller.Extractor;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

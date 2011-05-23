@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.model;
 
 import java.io.IOException;
 
@@ -10,6 +10,14 @@ import org.apache.http.client.ClientProtocolException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import uk.ac.shef.semweb.controller.Extractor;
+import uk.ac.shef.semweb.model.AlbumBuilder;
+import uk.ac.shef.semweb.model.ArtistBuilder;
+import uk.ac.shef.semweb.model.GigBuilder;
+import uk.ac.shef.semweb.model.RdfBuilder;
+import uk.ac.shef.semweb.model.UserBuilder;
+import uk.ac.shef.semweb.model.VenueBuilder;
 
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;

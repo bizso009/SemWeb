@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.model;
 
 
 // Add necessary packages.
@@ -6,6 +6,9 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import uk.ac.shef.semweb.controller.Extractor;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;

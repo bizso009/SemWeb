@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.view;
 
 // Add necessary imports.
 import java.io.File;
@@ -27,7 +27,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import uk.ac.shef.semweb.RdfBuilder.IntelWebProperties;
+import uk.ac.shef.semweb.controller.Extractor;
+import uk.ac.shef.semweb.model.RdfBuilder;
+import uk.ac.shef.semweb.model.RdfBuilder.IntelWebProperties;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ResIterator;
@@ -102,7 +104,6 @@ public abstract class HtmlGenerator
      */
     public void generate() throws TransformerException, FileNotFoundException, SAXException, IOException, ParserConfigurationException 
     {
-        // TODO extract methods
         ResIterator resources = model.listResourcesWithProperty(RDF.type, model.getResource(RdfBuilder.RDF_BASE + type));
         while (resources.hasNext()) 
         {

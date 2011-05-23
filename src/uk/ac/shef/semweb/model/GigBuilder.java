@@ -1,21 +1,19 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.model;
 
-// Add all the necessary imports
+// Add necessary imports
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-
 /**
- * This class is used to extract properties of an album from an xml file.
+ * This class is used to extract properties of a Gig from an xml file.
  * These properties are then used to populate the ontology.
  * @author Team BDM
  *
  */
-public class AlbumBuilder extends RdfBuilder 
+public class GigBuilder extends RdfBuilder 
 {
 
 	/**
@@ -25,10 +23,9 @@ public class AlbumBuilder extends RdfBuilder
 	 * @param url This argument takes in the url of the xml file.
 	 * @param withWebServices This argument determines whether dbPedia and twitter information is extracted.
 	 */
-    public AlbumBuilder(Model ontology, Document xml, String url, boolean withWebServices) 
+    public GigBuilder(Model ontology, Document xml, String url, boolean withDBpedia) 
     {
-    	// Call the super constructor.
-        super(ontology, xml, url, withWebServices);
+        super(ontology, xml, url, withDBpedia);
     }
 
     /**
@@ -40,20 +37,19 @@ public class AlbumBuilder extends RdfBuilder
     {
     	// Create new resource using the uri of the xml file.
     	// Add this resource to the ontology.
-        Resource albumRes = ontology.createResource(getUri());
+        Resource gigRes = ontology.createResource(getUri());
         // Add type property to the current resource.
-        albumRes.addProperty(RDF.type, properties.albumClas);
+        gigRes.addProperty(RDF.type, properties.gigClas);
 
         // Add remaining properties to the current resource.
-        albumRes.addProperty(properties.titleProp, getSingleProp(nodes.titleNode));
-        albumRes.addProperty(properties.genreProp, getSingleProp(nodes.genreNode));
-        albumRes.addProperty(properties.imageProp, getSingleProp(nodes.imageNode));
+        gigRes.addProperty(properties.dateProp, getSingleProp(nodes.dateNode));
+        gigRes.addProperty(properties.titleProp, getSingleProp(nodes.titleNode));
 
-        for (int i = 0; i < nodes.trackNodes.getLength(); i++) 
-        {
-            Node trackNode = nodes.trackNodes.item(i);
-            albumRes.addProperty(properties.trackProp, getSingleProp(trackNode));
-        }
+        Resource artistRes = ontology.createResource(getUrlAttr(nodes.artistNode));
+        artistRes.addProperty(properties.nameProp, getSingleProp(nodes.artistNode));
+
+        gigRes.addProperty(properties.artistProp, artistRes);
+
     }
 
     /**
@@ -66,4 +62,5 @@ public class AlbumBuilder extends RdfBuilder
         // nothing to extract
 
     }
+
 }

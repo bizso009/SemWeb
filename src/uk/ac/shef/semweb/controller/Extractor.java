@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.controller;
 
 // Add necessary imports.
 import java.io.File;
@@ -20,6 +20,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import uk.ac.shef.semweb.model.AlbumBuilder;
+import uk.ac.shef.semweb.model.ArtistBuilder;
+import uk.ac.shef.semweb.model.GigBuilder;
+import uk.ac.shef.semweb.model.RdfBuilder;
+import uk.ac.shef.semweb.model.UserBuilder;
+import uk.ac.shef.semweb.model.VenueBuilder;
+import uk.ac.shef.semweb.view.ArtistGenerator;
+import uk.ac.shef.semweb.view.IndexGenerator;
+import uk.ac.shef.semweb.view.VenueGenerator;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
@@ -114,21 +125,20 @@ public class Extractor
                     System.out.println(" -- NOT XML");
                     continue;
                 }
-                
-                try
+                try 
                 {
-	                // Get content of the document.
-	                Document xml = readXml(entity.getContent());
-	                // Create an instance of RdfBuilder to extract the data.
-	                RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
-	                // Extract the data.
-	                extractor.extract();
-	                System.out.println(" -- DONE");
-	                delay();
-                }catch (Exception e)
-                {
-                	 System.out.println(" -- HTTP ERROR - SKIPPING");
+                    // Get content of the document.
+                    Document xml = readXml(entity.getContent());
+                    // Create an instance of RdfBuilder to extract the data.
+                    RdfBuilder extractor = createRdfBuilder(ontology, xml, url, withDBPedia);
+                    // Extract the data.
+                    extractor.extract();
+                    System.out.println(" -- DONE");
+                } 
+                catch (Exception e){
+                    System.out.println(" -- HTTP ERROR");
                 }
+                delay();
             }
             System.out.println("Writing ontology");
             // Write rdf triples to the output file.

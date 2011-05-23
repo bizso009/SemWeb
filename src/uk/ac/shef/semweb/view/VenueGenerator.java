@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.view;
 
 // Add necessary imports.
 import java.io.FileNotFoundException;

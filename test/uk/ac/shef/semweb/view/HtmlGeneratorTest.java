@@ -1,4 +1,4 @@
-package uk.ac.shef.semweb;
+package uk.ac.shef.semweb.view;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +11,12 @@ import junit.framework.TestCase;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import uk.ac.shef.semweb.controller.Extractor;
+import uk.ac.shef.semweb.view.ArtistGenerator;
+import uk.ac.shef.semweb.view.HtmlGenerator;
+import uk.ac.shef.semweb.view.IndexGenerator;
+import uk.ac.shef.semweb.view.VenueGenerator;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
